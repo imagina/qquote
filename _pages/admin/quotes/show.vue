@@ -1,6 +1,6 @@
 <template>
   <div>
-    <quotaStepper :quotaId="$route.params.id"/>
+    <quotaStepper/>
   </div>
 </template>
 

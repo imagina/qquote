@@ -115,11 +115,6 @@
       productOrPackage,
       summaryQutation
     },
-    props:{
-      quotaId:{
-        default: null
-      }
-    },
     data () {
       return {
         loading: false,
