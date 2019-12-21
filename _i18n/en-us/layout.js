@@ -42,6 +42,7 @@ export default {
     valueUnit: 'Unit value',
     quantity: 'Quantity',
     total: 'Total',
+    additionalNotes: 'Additional Notes',
   },
 
   form:{
