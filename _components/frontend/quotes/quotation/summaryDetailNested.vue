@@ -57,6 +57,10 @@
               <summaryDetailNested :children="item.childrenGenerated"/>
             </div>
           </div>
+  
+          <div v-if="item.withNotes">
+            <b>{{$tr('qquote.layout.labels.additionalNotes')}}: </b> {{item.notes}}
+          </div>
           
         </div>
       </li>
