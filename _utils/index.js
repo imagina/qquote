@@ -1,4 +1,4 @@
-/* Convert String from skane or kebab case to camel case */
+/* Convert String from skane_case or kebab-case to camelCase */
 const toCamel = (s) => {
   return s.replace(/([-_][a-z])/ig, ($1) => {
     return $1.toUpperCase()
@@ -12,12 +12,12 @@ const isArray = (a) => {
   return Array.isArray(a)
 }
 
-/* Check is Objet */
+/* Check is Object */
 const isObject = (o) =>  {
   return o === Object(o) && !isArray(o) && typeof o !== 'function'
 }
 
-/* Convert keys in a object or array to snake case  */
+/* Convert keys`s object or array to snake case Format */
 export const keysToCamel = (o) => {
   if (isObject(o)) {
     const n = {}
