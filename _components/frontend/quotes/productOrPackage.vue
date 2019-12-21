@@ -27,6 +27,7 @@
         v-if="productOrPackage === 'product'"
         multiple
         outlined
+        use-chips
         v-model="productsSelected"
         :options="products"
         label="products" />
