@@ -144,14 +144,6 @@
           this.$store.dispatch('qquoteQuotation/set_product_or_package', newValue)
         },
       },
-      products2: {
-        get: function () {
-          return this.$store.state.qquoteQuotation.products
-        },
-        set: function (newValue) {
-          this.$store.dispatch('qquoteQuotation/set_products', newValue)
-        },
-      },
     },
     methods:{
       async initForm(){
@@ -219,12 +211,12 @@
       },
       sumCharacteristics( characteristic ){
 
-        // if characteristic is disabled
+        /*if characteristic is disabled*/
         if(!characteristic.checked){
           return 0
         }
 
-        // type 1 Select
+        /*type 1 Select*/
         if( characteristic.type == 1 ){
           let valueSelected = characteristic.children.find( element => element.id == characteristic.model.value) || {price: 0}
           let response = valueSelected.price
@@ -232,21 +224,21 @@
           return response
         }
 
-        // type 2 checkbox
+        /*type 2 checkbox*/
         if( characteristic.type == 2 && characteristic.model ){
           let response = characteristic.price
           response += this.sumChildren(characteristic.children || [])
           return response
         }
 
-        // type 3 value
+        /*type 3 value*/
         if( characteristic.type == 3 ){
           let response = characteristic.model || 0
           response += this.sumChildren(characteristic.children || [])
           return response
         }
 
-        // type 4 number
+        /*type 4 number*/
         if( characteristic.type == 4 ){
           let response = (characteristic.model *  characteristic.price)
           response += this.sumChildren(characteristic.childrengenerated || [])
@@ -256,12 +248,28 @@
         return 0
       },
       nextStep(){
+        /*Validate if the var productOrPackage has data*/
         if (this.step == 1 && this.productOrPackage == null){
-          // validar si selecciono algun paquete o algun producto
-          // emit alert
           this.$alert.error(this.$tr('ui.message.formInvalid'))
           return
         }
+        
+        /*Validate if var productOrPackage is equal to 'package' and validate if package has data*/
+        if ( this.productOrPackage == 'package') {
+          if ( Object.keys(this.$store.state.qquoteQuotation.package).length === 0 ){
+            this.$alert.error(this.$tr('ui.message.formInvalid'))
+            return
+          }
+        }
+
+        /*Validate if var productOrPackage is equal to 'product' and validate if productsSelected has data*/
+        if (this.productOrPackage == 'product') {
+          if (this.$store.state.qquoteQuotation.productsSelected.length === 0) {
+            this.$alert.error(this.$tr('ui.message.formInvalid'))
+            return
+          }
+        }
+        /*If all is OK pass to next step*/
         this.$refs.stepper.next()
       },
       saveQuote(){
