@@ -3,14 +3,13 @@
     <div class="row q-mt-md">
       <div class="col-md-4 q-pr-md flex content-end">
         <q-slider
-          
           label-always
           v-model="characteristic.model"
           :min="0"
           :max="characteristic.max"/>
       </div>
       <div class="col-md-4 q-pr-md">
-        Cantidad
+        {{$tr('qquote.layout.labels.quantity')}}
         <q-input
           dense
           filled
@@ -20,7 +19,7 @@
           prefix="$" />
       </div>
       <div class="col-md-4">
-        Total
+        {{$tr('qquote.layout.labels.total')}}
         <q-input
           dense
           outlined
@@ -36,7 +35,7 @@
           color="primary"
           outlined
           filled
-          label="Notas Adicionales"
+          :label="$tr('qquote.layout.labels.additionalNotes')"
           v-model="characteristic.notes"
           :disable="!characteristic.withNotes" >
           <template v-slot:prepend>
@@ -47,14 +46,14 @@
     </div>
     <div class="row q-mt-md">
       <div class="col-md-12">
-        
+
         <div v-for="(item, index) in characteristic.childrengenerated" :key="index">
           <div class="q-mb-md" >
             <fieldContainer
               :characteristic="item"/>
           </div>
         </div>
-        
+
       </div>
     </div>
   </div>
@@ -74,6 +73,10 @@
       }
     },
     watch:{
+      /* Each time the value of the model property is changed
+      in the characteristic object, the set of children that
+      it has as many times as indicated in the variable model
+      is rendered*/
       'characteristic.model': function (newValue, oldValue) {
         if (this.characteristic.children){
           this.characteristic.childrengenerated = []
@@ -87,27 +90,7 @@
     },
     data(){
       return {
-        show: true,
       }
     },
-    mounted(){
-      if (this.characteristic.children && !this.characteristic.childrengenerated) {
-        this.$set(this.characteristic, 'childrengenerated', [])
-      }
-    },
-    methods:{
-      modelChanged(){
-        if (this.characteristic.children){
-          this.characteristic['childrengenerated'] = []
-          for (let i = 1; i <= this.characteristic.model; i++) {
-            this.characteristic['childrengenerated'].push(this.$clone(this.characteristic.children))
-          }
-        }
-      }
-    }
   }
 </script>
-
-<style scoped>
-
-</style>

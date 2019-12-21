@@ -11,7 +11,7 @@
           :label="`${characteristic.name}`" />
       </div>
       <div class="col-md-4" color="primary">
-        Total
+        {{$tr('qquote.layout.labels.total')}}
         <q-input
           dense
           color="primary"
@@ -28,7 +28,7 @@
           color="primary"
           outlined
           filled
-          label="Notas Adicionales"
+          :label="$tr('qquote.layout.labels.additionalNotes')"
           v-model="characteristic.notes"
           :disable="!characteristic.withNotes" >
           <template v-slot:prepend>

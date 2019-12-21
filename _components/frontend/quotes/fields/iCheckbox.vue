@@ -7,7 +7,7 @@
         :label="`${characteristic.name} (${this.$trc(characteristic.price)})`" />
     </div>
     <div class="col-md-4">
-      Total
+      {{$tr('qquote.layout.labels.total')}}
       <q-input
         dense
         filled
