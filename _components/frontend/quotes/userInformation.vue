@@ -1,56 +1,123 @@
 <template>
-  <div class="q-gutter-y-md relative-position">
-    <div class="row">
-      <div class="col-md-12 text-h6">
-        <q-avatar color="primary" text-color="white" icon="person" size="sm"/>
-        {{ $tr('qquote.layout.labels.informationUser') }}
+  <div class="row">
+    <div class="col-md-12 q-mt-xl">
+      <div class="q-mt-sm q-px-md flex justify-center text-h5 heading-1">
+        <span class="text-grey q-px-md"> Perfil del <span class="text-bold text-primary">Cliente</span> </span>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <q-select
-          filled
-          v-model="user"
-          use-input
-          hide-selected
-          fill-input
-          input-debounce="0"
-          label="Usuario"
-          :options="users">
-          <template v-slot:no-option>
-            <q-item>
-              <q-item-section class="text-grey">
-                {{ $tr('qquote.layout.labels.noResults') }}
-              </q-item-section>
-            </q-item>
-          </template>
-        </q-select>
+    <div class="col-md-12 q-mt-lg">
+      <div class="row q-col-gutter-md">
+        <div class="col-xs-12 col-md-3">
+          <q-input filled v-model="firstName" label="Nombres" >
+            <template v-slot:prepend>
+              <q-icon name="person" color="primary"/>
+            </template>
+          </q-input>
+        </div>
+        <div class="col-xs-12 col-md-3">
+          <q-input filled v-model="lastName" label="Apellidos">
+            <template v-slot:prepend>
+              <q-icon name="person_outline" color="primary"/>
+            </template>
+          </q-input>
+        </div>
+        <div class="col-xs-12 col-md-3">
+          <q-input filled v-model="options.identification" label="Cédula o Nit">
+            <template v-slot:prepend>
+              <q-icon name="fas fa-address-card" color="primary"/>
+            </template>
+          </q-input>
+        </div>
+        <div class="col-xs-12 col-md-3">
+          <q-input filled v-model="options.birthday" mask="date" class="q-pb-none" label="Fecha de Nacimiento">
+            <template v-slot:prepend>
+              <q-icon name="event" class="cursor-pointer" color="primary">
+                <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
+                  <q-date v-model="options.birthday" @input="() => $refs.qDateProxy.hide()" />
+                </q-popup-proxy>
+              </q-icon>
+            </template>
+          </q-input>
+        </div>
       </div>
     </div>
-    <div class="row q-mb-md">
-      <div class="col-md-6 q-pr-sm q-gutter-y-sm">
-        <q-input
-          :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
-          :label="`${$tr('qquote.layout.form.firstName')}`"
-          filled
-          v-model="firstName" />
-        <q-input
-          :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
-          :label="`${$tr('qquote.layout.form.email')}`"
-          filled
-          v-model="email" />
+    <div class="col-md-12 q-mt-md">
+      <div class="row q-col-gutter-md">
+        <div class="col-xs-12 col-md-3">
+          <q-select
+            :loading="dataCountries.loading"
+            filled
+            v-model="options.country"
+            :options="dataCountries.countries"
+            label="País"
+            @input="getProvinces(options.country.value)">
+            <template v-slot:prepend>
+              <q-icon name="fas fa-globe-asia" color="primary"/>
+            </template>
+          </q-select>
+        </div>
+        <div class="col-xs-12 col-md-3">
+          <q-select
+            :loading="dataProvinces.loading"
+            filled
+            v-model="options.department"
+            :options="dataProvinces.provinces"
+            label="Departamento o Estado"
+            @input="getCities(options.department.value)">
+            <template v-slot:prepend>
+              <q-icon name="fas fa-map-marker-alt" color="primary"/>
+            </template>
+          </q-select>
+        </div>
+        <div class="col-xs-12 col-md-3">
+          <q-select
+            :loading="dataCities.loading"
+            filled
+            v-model="options.city"
+            :options="dataCities.cities"
+            label="Ciudad" >
+            <template v-slot:prepend>
+              <q-icon name="gps_fixed" color="primary"/>
+            </template>
+          </q-select>
+        </div>
+        <div class="col-xs-12 col-md-3">
+          <q-input
+            mask="(###) ### - ####"
+            unmasked-value
+            filled
+            v-model="phone"
+            label="Celular o Telèfono">
+            <template v-slot:prepend>
+              <q-icon name="phone_android" color="primary"/>
+            </template>
+          </q-input>
+        </div>
       </div>
-      <div class="col-md-6 q-gutter-y-sm">
-        <q-input
-          :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
-          :label="`${$tr('qquote.layout.form.lastName')}`"
-          filled
-          v-model="lastName" />
-        <q-input
-          :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
-          :label="`${$tr('qquote.layout.form.phone')}`"
-          filled
-          v-model="phone" />
+    </div>
+    <div class="col-md-12 q-mt-md">
+      <div class="row q-col-gutter-md">
+        <div class="col-xs-12 col-md-3">
+          <q-input filled v-model="email" label="Email" >
+            <template v-slot:prepend>
+              <q-icon name="email" color="primary"/>
+            </template>
+          </q-input>
+        </div>
+        <div class="col-xs-12 col-md-3">
+          <q-input filled v-model="options.currency" label="Moneda en la que se cotiza">
+            <template v-slot:prepend>
+              <q-icon name="attach_money" color="primary"/>
+            </template>
+          </q-input>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <q-input filled v-model="notes" label="Notas Adicionales ...">
+            <template v-slot:prepend>
+              <q-icon name="fas fa-comment-dots" color="primary"/>
+            </template>
+          </q-input>
+        </div>
       </div>
     </div>
     <inner-loading :visible="loading"/>
@@ -127,8 +194,9 @@
       },
     },
     async created(){
-      this.getUsers()
+      //this.getUsers()
       this.validateIsAdmin()
+      this.getCountries()
     },
     watch: {
       user: function (val){
@@ -136,25 +204,104 @@
         this.lastName = this.user.value.lastName
         this.email = this.user.value.email
         this.customerId = this.user.value.id
+      },
+      'options.country': function (val) {
+        this.options.department = ''
+        this.options.city = ''
+      },
+      'options.department': function (val) {
+        this.options.city = ''
       }
     },
     data () {
       return {
         loading: false,
         users: [],
+        
+        dataCountries: {
+          countries:[],
+          loading: false,
+        },
+        dataProvinces: {
+          provinces:[],
+          loading: false,
+        },
+        dataCities: {
+          cities:[],
+          loading: false,
+        },
+        
         user: {},
+        model: '',
+        options: {
+          identification: '',
+          birthday: '',
+          country: '',
+          department: '',
+          city: '',
+          currency: '',
+        }
       }
     },
     methods:{
       getUsers(){
-        this.loading = true
-        this.$crud.index('apiRoutes.quser.users', { params: {} } ).then( response => {
-          this.users = Object.freeze(response.data.map( user => ({label: user.fullName, value: user})))
-          this.loading = false
+        if (this.$store.state.quserAuth.userId) {
+          this.loading = true
+          this.$crud.index('apiRoutes.quser.users', { params: {} } ).then( response => {
+            this.users = Object.freeze(response.data.map( user => ({label: user.fullName, value: user})))
+            this.loading = false
+          }).catch( error => {
+            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+            console.warn( error )
+            this.loading = false
+          })
+        }
+      },
+      getCountries(){
+        this.dataCountries.loading = true
+        this.$crud.index('apiRoutes.qlocations.countries', { params: {} } ).then( response => {
+          this.dataCountries.countries = Object.freeze(response.data.map( item => ({label: item.name, value: item.id})))
+          this.dataCountries.loading = false
         }).catch( error => {
           this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
           console.warn( error )
-          this.loading = false
+          this.dataCountries.loading = false
+        })
+      },
+      getProvinces(countryId){
+        this.dataProvinces.loading = true
+        let params =  {
+          params: {
+            filter:{
+              country: countryId
+            }
+          }
+        }
+        this.$crud.index('apiRoutes.qlocations.provinces', params).then( response => {
+          this.dataProvinces.provinces = Object.freeze(response.data.map( item => ({label: item.name, value: item.id})))
+          this.dataProvinces.loading = false
+        }).catch( error => {
+          this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+          console.warn( error )
+          this.dataProvinces.loading = false
+        })
+      },
+      getCities(provinceId){
+        this.dataCities.loading = true
+        let params =  {
+          params: {
+            filter:{
+              province_id: provinceId
+            }
+          }
+        }
+        this.$crud.index('apiRoutes.qlocations.cities', params).then( response => {
+          this.dataCities.cities = Object.freeze(response.data.map( item => ({label: (item.name).toLowerCase(), value: item.id})))
+          this.dataCities.loading = false
+        }).catch( error => {
+          this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+          console.warn( error )
+          this.dataCities.loading = false
         })
       },
       validateIsAdmin(){
