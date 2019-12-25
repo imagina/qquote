@@ -1,22 +1,18 @@
 <template>
   <div>
     <div class="row q-mt-md">
-      <div class="col-md-8 q-pr-md">
+      <div class="col-xs-12 col-md-8 q-pr-md">
         {{characteristic.name}}
         <q-input
-          dense
           v-model.number="characteristic.model"
           type="number"
           outlined />
       </div>
-      <div class="col-md-4">
+      <div class="col-xs-12 col-md-4">
         {{$tr('qquote.layout.labels.total')}}
-        <q-input
-          dense
-          outlined
-          v-model="characteristic.model"
-          disable
-          prefix="$"/>
+        <div style="border-radius: 5px; border: 1px solid silver; padding: 9px; font-size: 24px" class="text-primary text-bold">
+          {{$trc(characteristic.model || 0 )}}
+        </div>
       </div>
     </div>
     <div class="row">
