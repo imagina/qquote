@@ -1,31 +1,26 @@
 <template>
   <div>
     <div class="row q-mt-md">
-      <div class="col-md-4 q-pr-md flex content-end">
+      <div class="col-xs-12 col-md-4 q-pr-md flex content-end">
         <q-slider
           label-always
           v-model="characteristic.model"
           :min="0"
           :max="characteristic.max"/>
       </div>
-      <div class="col-md-4 q-pr-md">
+      <div class="col-xs-12 col-md-4 q-pr-md">
         {{$tr('qquote.layout.labels.quantity')}}
         <q-input
-          dense
           filled
           outlined
           v-model="characteristic.model"
-          disable
-          prefix="$" />
+          disable/>
       </div>
-      <div class="col-md-4">
+      <div class="col-xs-12 col-md-4">
         {{$tr('qquote.layout.labels.total')}}
-        <q-input
-          dense
-          outlined
-          v-model="characteristic.model * characteristic.price"
-          disable
-          prefix="$" />
+        <div style="border-radius: 5px; border: 1px solid silver; padding: 9px; font-size: 24px" class="text-primary text-bold">
+          {{$trc((characteristic.model * characteristic.price) || 0 )}}
+        </div>
       </div>
     </div>
     <div class="row">
