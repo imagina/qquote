@@ -1,28 +1,23 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-md-8 q-pr-md">
+      <div class="col-xs-12 col-md-8 q-pr-md">
         <br>
         <q-select
-          dense
           outlined
           v-model="characteristic.model"
           :options="options"
           :label="`${characteristic.name}`" />
       </div>
-      <div class="col-md-4" color="primary">
+      <div class="col-xs-12 col-md-4">
         {{$tr('qquote.layout.labels.total')}}
-        <q-input
-          dense
-          color="primary"
-          outlined
-          v-model="characteristic.model.price"
-          disable
-          prefix="$"/>
+        <div style="border-radius: 5px; border: 1px solid silver; padding: 9px; font-size: 24px" class="text-primary text-bold">
+          {{$trc(characteristic.model.price || 0 )}}
+        </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-8 q-pr-md q-pt-md">
+      <div class="col-xs-12 col-md-8 q-pr-md q-pt-md">
         <q-input
           v-if="characteristic.withNotes"
           color="primary"
@@ -74,7 +69,7 @@
     computed:{
       options(){
         return this.characteristic.children.filter(item => item.type == this.typeOption).map( item => {
-          return {label: `${item.name} (${this.$trc(item.price)})`, value: item.id, price: item.price}
+          return {label: `${item.name}`, value: item.id, price: item.price}
         })
       },
     },
