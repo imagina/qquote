@@ -2,11 +2,11 @@
   <q-list bordered>
     <q-expansion-item
       dense-toggle
-      header-class="text-primary bg-grey-3 "
+      header-class="text-primary bg-grey-3"
       expand-icon-class="text-primary">
       <template v-slot:header>
         <q-checkbox v-model="characteristic.checked" />
-        <q-item-section>
+        <q-item-section class="q-py-md">
           <b>{{characteristic.name}}</b>
         </q-item-section>
       </template>
