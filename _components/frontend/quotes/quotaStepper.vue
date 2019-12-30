@@ -1,103 +1,183 @@
 <template>
-  <q-form
-    @submit="createItem()"
-    ref="formContent"
-    class="row q-gutter-y-md full-width"
-    autocomplete="off"
-    @validation-error="$alert.error($tr('ui.message.formInvalid'))">
-    <div class="col-md-12 box">
-      <userInformation />
+  <div class="row">
+    <div class="col-md-12 q-mt-xl">
+      <div class="q-mt-sm q-px-md flex justify-center text-h5 heading-1">
+        <span class="text-grey q-px-md"> Realizar  <span class="text-bold text-primary">Cotización</span> </span>
+      </div>
     </div>
     <div class="col-md-12">
       <q-stepper
-      :keep-alive="false"
-      class="box"
-      v-model="step"
-      ref="stepper"
-      color="primary"
-      animated>
-      <q-step
-        :name="1"
-        prefix="1"
-        :title="`${$tr('qquote.layout.labels.selectProductsOrPackage')}`"
-        icon="one"
-        :done="step > 1">
-        <productOrPackage @selectChanged="getProducts"/>
-      </q-step>
-      <q-step
-        :name="2"
-        prefix="2"
-        :title="`${$tr('qquote.layout.labels.quotation')}`"
-        icon="create_new_folder"
-        :done="step > 2">
-        <div class="row">
-          <div class="col-12">
-            <quotation :products="products"/>
+        :vertical="$q.platform.is.mobile"
+        class="no-shadow"
+        v-model="step"
+        ref="stepper"
+        color="primary"
+        animated>
+        <q-step
+          :name="1"
+          prefix="1"
+          :title="`Escoge el paquete de Servicios`">
+          <selectPackages @next="handeNext"/>
+        </q-step>
+        <q-step
+          :name="2"
+          prefix="2"
+          :title="`Selecciona las Opciones a Cotizar`">
+          <quotation :products="products"/>
+
+          <div class="q-ma-none q-pa-none q-mt-sm flex justify-between" v-if="$q.platform.is.desktop">
+
+            <div>
+              <q-btn
+                v-if="step == 2"
+                @click="$refs.stepper.previous()"
+                color="red"
+                push
+                size="lg">
+                <q-icon left name="keyboard_backspace" class=""/>
+                <div>Atras</div>
+              </q-btn>
+            </div>
+
+            <div class="flex justify-end items-center">
+              <!--if total > 0-->
+              <div class="q-pr-md text-primary text-bold" style="font-size: 18px">
+                {{$tr('qquote.layout.labels.totalToPay')}}
+              </div>
+
+              <div class="q-pr-md" style="min-width: 300px">
+                <div style="border-radius: 5px; border: 1px solid silver; padding: 9px; font-size: 24px" class="text-primary text-bold">
+                  {{$trc(total || 0 )}}
+                </div>
+              </div>
+
+              <q-btn
+                v-if="step == 2"
+                :disable="total == 0"
+                @click="$refs.stepper.next()"
+                :label="$tr('qquote.layout.labels.finish')"
+                color="light-green-6"
+                push
+                size="lg"
+                icon="check" />
+              </div>
+            </div>
+          
+          <q-toolbar
+            class="bg-grey-3 fixed-bottom"
+            v-if="$q.platform.is.mobile"
+            style="z-index: 2000000">
+            <q-btn
+              v-if="step == 2"
+              @click="$refs.stepper.previous()"
+              color="red"
+              icon="keyboard_backspace"
+              push />
+            <q-toolbar-title>
+              <div class="q-pr-md text-primary text-bold" >
+                {{$trc(total || 0 )}}
+              </div>
+            </q-toolbar-title>
+            <q-btn
+              v-if="step == 2"
+              :disable="total == 0"
+              @click="$refs.stepper.next()"
+              color="light-green-6"
+              push
+              icon="check" />
+          </q-toolbar>
+          
+          <inner-loading :visible="loading"/>
+
+        </q-step>
+        <q-step
+          :name="4"
+          prefix="3"
+          :title="`Resumen de la Cotización`">
+          <summaryQutation :products="products"/>
+          
+          <div class="q-ma-none q-pa-none q-mt-sm flex justify-between" v-if="$q.platform.is.desktop">
+            <div>
+              <q-btn
+                v-if="step == 4"
+                @click="$refs.stepper.previous()"
+                color="red"
+                push
+                size="lg">
+                <q-icon left name="keyboard_backspace" class=""/>
+                <div>Atras</div>
+              </q-btn>
+            </div>
+
+            <div class="flex justify-end items-center">
+              <!--if total > 0-->
+              <div class="q-pr-md text-primary text-bold" style="font-size: 18px">
+                {{$tr('qquote.layout.labels.totalToPay')}}
+              </div>
+
+              <div class="q-pr-md" style="min-width: 300px">
+                <div style="border-radius: 5px; border: 1px solid silver; padding: 9px; font-size: 24px" class="text-primary text-bold">
+                  {{$trc(total || 0 )}}
+                </div>
+              </div>
+
+              <q-btn
+                size="lg"
+                push
+                icon="mail_outline"
+                type="submit"
+                v-if="step == 4"
+                class="q-mr-md"
+                :label="$tr('qquote.layout.labels.send')"
+                color="primary"/>
+
+              <q-btn
+                size="lg"
+                push
+                icon="fas fa-download"
+                type="submit"
+                v-if="step == 4"
+                :label="$tr('qquote.layout.labels.download')"
+                color="red"/>
+
+            </div>
           </div>
-        </div>
-      </q-step>
-      <q-step
-        :name="4"
-        prefix="3"
-        :title="`${$tr('qquote.layout.labels.resumeAndSend')}`"
-        icon="add_comment">
-        <summaryQutation :products="products"/>
-      </q-step>
-      <template v-slot:navigation>
-        <q-stepper-navigation class="q-ma-none q-pa-none flex justify-end">
 
-          <!--if total > 0-->
-          <div class="q-pr-md flex items-center justify-end" v-if="total > 0">
-            {{$tr('qquote.layout.labels.totalToPay')}}
-          </div>
-          <div class="q-pr-md" v-if="total > 0">
-            <q-input
-              dense
-              color="primary"
-              outlined
-              v-model="total"
-              disable/>
-          </div>
+          <q-toolbar class="bg-grey-3 fixed-bottom" v-if="$q.platform.is.mobile" style="z-index: 2000000">
 
-          <!--if step 1-->
-          <q-btn
-            v-if="step == 1"
-            @click="nextStep"
-            color="primary"
-            :label="$tr('qquote.layout.labels.continue')"/>
+            <q-btn
+              v-if="step == 4"
+              @click="$refs.stepper.previous()"
+              color="red"
+              push
+              icon="keyboard_backspace" />
 
-          <!--if step 2-->
-          <q-btn
-            v-if="step == 2"
-            @click="$refs.stepper.next()"
-            :label="$tr('qquote.layout.labels.finish')"
-            color="green"
-            size="md"
-            icon="check" />
+            <q-toolbar-title>
+              <div class="q-pr-md text-primary text-bold" >
+                {{$trc(total || 0 )}}
+              </div>
+            </q-toolbar-title>
+            <q-btn
+              push
+              icon="mail_outline"
+              type="submit"
+              v-if="step == 4"
+              class="q-mr-md"
+              color="primary"/>
 
-          <!--if step 4-->
-          <q-btn
-            icon="mail_outline"
-            type="submit"
-            @click="saveQuote"
-            v-if="step == 4"
-            class="q-mr-md"
-            :label="$tr('qquote.layout.labels.send')"
-            color="primary"/>
+            <q-btn
+              push
+              icon="fas fa-download"
+              type="submit"
+              v-if="step == 4"
+              color="red"/>
+          </q-toolbar>
 
-          <q-btn
-            icon="fas fa-download"
-            type="submit"
-            @click="saveQuote"
-            v-if="step == 4"
-            :label="$tr('qquote.layout.labels.download')"
-            color="red"/>
 
-        </q-stepper-navigation>
-      </template>
-    </q-stepper>
+        </q-step>
+      </q-stepper>
     </div>
-  </q-form>
+  </div>
 </template>
 
 <script>
@@ -105,6 +185,7 @@
   import productOrPackage from '@imagina/qquote/_components/frontend/quotes/productOrPackage'
   import summaryQutation from '@imagina/qquote/_components/frontend/quotes/summaryQutation'
   import userInformation from '@imagina/qquote/_components/frontend/quotes/userInformation'
+  import selectPackages from '@imagina/qquote/_components/frontend/quotes/selectPackage'
   import { keysToCamel } from '@imagina/qquote/_utils/index'
 
   export default {
@@ -113,7 +194,8 @@
       userInformation,
       quotation,
       productOrPackage,
-      summaryQutation
+      summaryQutation,
+      selectPackages
     },
     data () {
       return {
@@ -146,6 +228,10 @@
       },
     },
     methods:{
+      handeNext(){
+        this.$refs.stepper.next()
+        this.getProducts()
+      },
       async initForm(){
         this.loading = true
         if (this.$route.params.id){
@@ -187,8 +273,9 @@
           params.params.filter['ids'] = this.$store.state.qquoteQuotation.productsSelected.map( item => (item.value))
         }
         if (this.$store.state.qquoteQuotation.productOrPackage == 'package'){
-          params.params.filter['package'] = this.$store.state.qquoteQuotation.package.value
+          params.params.filter['package'] = this.$store.state.qquoteQuotation.package.id
         }
+        this.products = []
         this.loading = true
         this.$crud.index( 'apiRoutes.qquote.products', params ).then( response => {
           this.products = this.formatProducts(response.data)
@@ -253,7 +340,7 @@
           this.$alert.error(this.$tr('ui.message.formInvalid'))
           return
         }
-        
+
         /*Validate if var productOrPackage is equal to 'package' and validate if package has data*/
         if ( this.productOrPackage == 'package') {
           if ( Object.keys(this.$store.state.qquoteQuotation.package).length === 0 ){
@@ -300,3 +387,17 @@
     }
   }
 </script>
+
+<style>
+  .q-stepper__dot{
+    font-size: 18px;
+    width: 40px;
+    height: 40px;
+  }
+  .q-stepper__title{
+    font-size: 18px;
+  }
+  .q-stepper__header{
+    padding: 0 18px;
+  }
+</style>
