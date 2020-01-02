@@ -1,17 +1,11 @@
 <template>
 <div>
   <div class="row">
-    <div class="col-md-6 q-mb-xl" v-for="(product, index) in products" :key="index">
+    <div class="col-md-6 q-mb-xl text-grey-7" v-for="(product, index) in products" :key="index" style="font-size: 15px">
       <div class="text-primary">
         <b>{{product.name}}</b>
       </div>
       <summaryDetailNested :children="product.characteristics" />
-    </div>
-    <div class="col-md-12 q-mb-xl">
-      <div>
-        Notas Adicionales
-      </div>
-      <q-editor v-model="notes" min-height="10rem" />
     </div>
   </div>
 </div>
