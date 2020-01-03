@@ -7,10 +7,10 @@
           <div v-if="item.type == 1">
             <div class="text-primary text-bold">
               <q-icon name="fas fa-square" size="6px"/>
-              {{item.name}} <small>{{item.model.label}}</small>
+              {{item.name}} <span>{{item.model.label}}</span>
             </div>
-            <div class="">{{$tr('qquote.layout.labels.valueUnit')}}: {{$trc(item.model.price)}} </div>
-            <div class="">{{$tr('qquote.layout.labels.quantity')}}: 1 </div>
+            <div> <span class="text-bold"> {{$tr('qquote.layout.labels.valueUnit')}} </span>: {{$trc(item.model.price || 0)}} </div>
+            <div> <span class="text-bold"> {{$tr('qquote.layout.labels.quantity')}} </span>: 1 </div>
             <div><b>{{$tr('qquote.layout.labels.total')}}:</b> {{$trc(sumCharacteristics(item))}}</div>
             <div v-if="item.children">
               <div v-for="(item, index) in item.children">
@@ -24,8 +24,8 @@
               <q-icon name="fas fa-square" size="6px"/>
               {{item.name}}
             </div>
-            <div class="">{{$tr('qquote.layout.labels.valueUnit')}}: {{$trc(item.price)}} </div>
-            <div class="">{{$tr('qquote.layout.labels.quantity')}}: 1 </div>
+            <div class=""> <span class="text-bold"> {{$tr('qquote.layout.labels.valueUnit')}} </span> : {{$trc(item.price || 0 )}} </div>
+            <div class=""> <span class="text-bold"> {{$tr('qquote.layout.labels.quantity')}} </span> : 1 </div>
             <div><b>{{$tr('qquote.layout.labels.total')}}:</b> {{$trc(item.price)}}</div>
             <div v-if="item.children">
               <summaryDetailNested :children="item.children"/>
@@ -37,8 +37,8 @@
               <q-icon name="fas fa-square" size="6px"/>
               {{item.name}}
             </div>
-            <div class="">{{$tr('qquote.layout.labels.valueUnit')}}: {{$trc(sumCharacteristics(item))}} </div>
-            <div class="">{{$tr('qquote.layout.labels.quantity')}}: 1 </div>
+            <div class=""> <span class="text-bold"> {{$tr('qquote.layout.labels.valueUnit')}} </span> : {{$trc(sumCharacteristics(item))}} </div>
+            <div class=""><span class="text-bold"> {{$tr('qquote.layout.labels.quantity')}} </span>: 1 </div>
             <div><b>{{$tr('qquote.layout.labels.total')}}:</b> {{$trc(sumCharacteristics(item))}}</div>
             <div v-if="item.children">
               <summaryDetailNested :children="item.children"/>
@@ -50,8 +50,8 @@
               <q-icon name="fas fa-square" size="6px"/>
               {{item.name}}
             </div>
-            <div class="">{{$tr('qquote.layout.labels.valueUnit')}}: {{$trc(item.price)}} </div>
-            <div class="">{{$tr('qquote.layout.labels.quantity')}}: {{item.model}} </div>
+            <div class=""> <span class="text-bold"> {{$tr('qquote.layout.labels.valueUnit')}} </span>: {{$trc(item.price || 0)}} </div>
+            <div class=""> <span class="text-bold"> {{$tr('qquote.layout.labels.quantity')}} </span> : {{item.model}} </div>
             <div><b>{{$tr('qquote.layout.labels.total')}}:</b> {{$trc(sumCharacteristics(item))}}</div>
             <div v-if="item.children">
               <summaryDetailNested :children="item.childrenGenerated"/>

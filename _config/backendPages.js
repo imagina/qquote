@@ -1,6 +1,6 @@
 export default {
   packages: {
-    permission: 'iquote.packages.index',
+    permission: null,
     activated: true,
     path: '/quote/packages/index',
     name: 'qquote.admin.packages',
