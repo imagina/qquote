@@ -43,6 +43,7 @@ export default {
     quantity: 'Quantity',
     total: 'Total',
     additionalNotes: 'Additional Notes',
+    search: 'Search',
   },
 
   form:{
