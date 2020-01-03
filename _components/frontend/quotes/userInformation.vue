@@ -2,34 +2,34 @@
   <div class="row">
     <div class="col-md-12 q-mt-xl">
       <div class="q-mt-sm q-px-md flex justify-center text-h5 heading-1">
-        <span class="text-grey q-px-md"> Perfil del <span class="text-bold text-primary">Cliente</span> </span>
+        <span class="text-grey q-px-md"> {{$tr('qquote.layout.labels.profile')}} <span class="text-bold text-primary">{{$tr('qquote.layout.labels.customer')}}</span> </span>
       </div>
     </div>
     <div class="col-md-12 q-mt-lg">
       <div class="row q-col-gutter-md">
         <div class="col-xs-12 col-md-3">
-          <q-input filled v-model="firstName" label="Nombres" >
+          <q-input filled v-model="firstName" :label="$tr('qquote.layout.form.firstName')" >
             <template v-slot:prepend>
               <q-icon name="person" color="primary"/>
             </template>
           </q-input>
         </div>
         <div class="col-xs-12 col-md-3">
-          <q-input filled v-model="lastName" label="Apellidos">
+          <q-input filled v-model="lastName" :label="$tr('qquote.layout.form.lastName')">
             <template v-slot:prepend>
               <q-icon name="person_outline" color="primary"/>
             </template>
           </q-input>
         </div>
         <div class="col-xs-12 col-md-3">
-          <q-input filled v-model="options.identification" label="Cédula o Nit">
+          <q-input filled v-model="options.identification" :label="$tr('qquote.layout.form.identification')">
             <template v-slot:prepend>
               <q-icon name="fas fa-address-card" color="primary"/>
             </template>
           </q-input>
         </div>
         <div class="col-xs-12 col-md-3">
-          <q-input filled v-model="options.birthday" mask="date" class="q-pb-none" label="Fecha de Nacimiento">
+          <q-input filled v-model="options.birthday" mask="date" class="q-pb-none" :label="$tr('qquote.layout.form.dateBirth')">
             <template v-slot:prepend>
               <q-icon name="event" class="cursor-pointer" color="primary">
                 <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
@@ -49,7 +49,7 @@
             filled
             v-model="options.country"
             :options="dataCountries.countries"
-            label="País"
+            :label="$tr('qquote.layout.form.country')"
             @input="getProvinces(options.country.value)">
             <template v-slot:prepend>
               <q-icon name="fas fa-globe-asia" color="primary"/>
@@ -62,7 +62,7 @@
             filled
             v-model="options.department"
             :options="dataProvinces.provinces"
-            label="Departamento o Estado"
+            :label="$tr('qquote.layout.form.department')"
             @input="getCities(options.department.value)">
             <template v-slot:prepend>
               <q-icon name="fas fa-map-marker-alt" color="primary"/>
@@ -75,7 +75,7 @@
             filled
             v-model="options.city"
             :options="dataCities.cities"
-            label="Ciudad" >
+            :label="$tr('qquote.layout.form.city')" >
             <template v-slot:prepend>
               <q-icon name="gps_fixed" color="primary"/>
             </template>
@@ -87,7 +87,7 @@
             unmasked-value
             filled
             v-model="phone"
-            label="Celular o Telèfono">
+            :label="$tr('qquote.layout.form.phone')" >
             <template v-slot:prepend>
               <q-icon name="phone_android" color="primary"/>
             </template>
@@ -98,21 +98,21 @@
     <div class="col-md-12 q-mt-md">
       <div class="row q-col-gutter-md">
         <div class="col-xs-12 col-md-3">
-          <q-input filled v-model="email" label="Email" >
+          <q-input filled v-model="email" :label="$tr('qquote.layout.form.email')" >
             <template v-slot:prepend>
               <q-icon name="email" color="primary"/>
             </template>
           </q-input>
         </div>
         <div class="col-xs-12 col-md-3">
-          <q-input filled v-model="options.currency" label="Moneda en la que se cotiza">
+          <q-input filled v-model="options.currency" :label="$tr('qquote.layout.form.currencyQuoted')">
             <template v-slot:prepend>
               <q-icon name="attach_money" color="primary"/>
             </template>
           </q-input>
         </div>
         <div class="col-xs-12 col-md-6">
-          <q-input filled v-model="notes" label="Notas Adicionales ...">
+          <q-input filled v-model="notes" :label="$tr('qquote.layout.form.notes')">
             <template v-slot:prepend>
               <q-icon name="fas fa-comment-dots" color="primary"/>
             </template>
@@ -217,7 +217,7 @@
       return {
         loading: false,
         users: [],
-        
+
         dataCountries: {
           countries:[],
           loading: false,
@@ -230,7 +230,7 @@
           cities:[],
           loading: false,
         },
-        
+
         user: {},
         model: '',
         options: {
