@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-12 q-mt-xl">
       <div class="q-mt-sm q-px-md flex justify-center text-h5 heading-1">
-        <span class="text-grey q-px-md"> Realizar  <span class="text-bold text-primary">Cotización</span> </span>
+        <span class="text-grey q-px-md"> {{$tr('qquote.layout.labels.make')}} <span class="text-bold text-primary">{{$tr('qquote.layout.labels.quotation')}} </span> </span>
       </div>
     </div>
     <div class="col-md-12">
@@ -16,13 +16,13 @@
         <q-step
           :name="1"
           prefix="1"
-          :title="`Escoge el paquete de Servicios`">
+          :title="`${$tr('qquote.layout.labels.choosePackage')}`">
           <selectPackages @next="handeNext"/>
         </q-step>
         <q-step
           :name="2"
           prefix="2"
-          :title="`Selecciona las Opciones a Cotizar`">
+          :title="`${$tr('qquote.layout.labels.selectQuote')}`">
           <quotation :products="products"/>
 
           <div class="q-ma-none q-pa-none q-mt-sm flex justify-between" v-if="$q.platform.is.desktop">
@@ -35,7 +35,7 @@
                 push
                 size="lg">
                 <q-icon left name="keyboard_backspace" class=""/>
-                <div>Atras</div>
+                <div>{{$tr('qquote.layout.labels.back')}}</div>
               </q-btn>
             </div>
 
@@ -62,7 +62,7 @@
                 icon="check" />
               </div>
             </div>
-          
+
           <q-toolbar
             class="bg-grey-3 fixed-bottom"
             v-if="$q.platform.is.mobile"
@@ -86,16 +86,16 @@
               push
               icon="check" />
           </q-toolbar>
-          
+
           <inner-loading :visible="loading"/>
 
         </q-step>
         <q-step
           :name="4"
           prefix="3"
-          :title="`Resumen de la Cotización`">
+          :title="`${$tr('qquote.layout.labels.quotationSummary')}`">
           <summaryQutation :products="products"/>
-          
+
           <div class="q-ma-none q-pa-none q-mt-sm flex justify-between" v-if="$q.platform.is.desktop">
             <div>
               <q-btn
@@ -105,7 +105,7 @@
                 push
                 size="lg">
                 <q-icon left name="keyboard_backspace" class=""/>
-                <div>Atras</div>
+                <div>{{$tr('qquote.layout.labels.back')}}</div>
               </q-btn>
             </div>
 

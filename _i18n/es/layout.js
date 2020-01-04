@@ -46,6 +46,10 @@ export default {
     search: 'Búsqueda',
     profile: 'Perfil del',
     customer: 'Cliente',
+    make: 'Realizar',
+    choosePackage: 'Escoge el paquete de Servicios',
+    selectQuote: 'Selecciona las Opciones a Cotizar',
+    quotationSummary: 'Resumen de la Cotización',
   },
 
   form:{

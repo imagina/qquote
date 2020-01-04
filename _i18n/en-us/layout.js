@@ -46,6 +46,10 @@ export default {
     search: 'Search',
     profile: 'Client`s',
     customer: 'profile',
+    make: 'Make',
+    choosePackage: 'Choose the Services package',
+    selectQuote: 'Select the Options to Quote',
+    quotationSummary: 'Quotation Summary',
   },
 
   form:{
