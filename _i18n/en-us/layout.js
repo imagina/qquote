@@ -33,7 +33,7 @@ export default {
     continue: 'Continue',
     finish: 'Finish',
     back: 'back',
-    totalToPay: 'Total to Pay',
+    totalToPay: 'TOTAL TO PAY',
     whatWantQuote: 'What do you want to quote',
     products: 'Products',
     package: 'Package',
