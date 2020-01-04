@@ -50,6 +50,8 @@ export default {
     choosePackage: 'Choose the Services package',
     selectQuote: 'Select the Options to Quote',
     quotationSummary: 'Quotation Summary',
+    selectedPackage: 'Selected Package',
+
   },
 
   form:{

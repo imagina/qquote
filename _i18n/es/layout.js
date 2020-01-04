@@ -50,6 +50,8 @@ export default {
     choosePackage: 'Escoge el paquete de Servicios',
     selectQuote: 'Selecciona las Opciones a Cotizar',
     quotationSummary: 'Resumen de la Cotización',
+    selectedPackage: 'Paquete Seleccionado',
+
   },
 
   form:{

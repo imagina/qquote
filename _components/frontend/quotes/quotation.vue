@@ -9,7 +9,7 @@
           </div>
           <div class="q-pt-xs">
             <div class="text-h5 text-bold">{{$store.state.qquoteQuotation.package.name}}</div>
-            <div class="text-bold">Paquete Seleccionado</div>
+            <div class="text-bold">{{$tr('qquote.layout.labels.selectedPackage')}}</div>
           </div>
         </div>
       </div>
