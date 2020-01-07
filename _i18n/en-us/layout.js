@@ -51,6 +51,8 @@ export default {
     selectQuote: 'Select the Options to Quote',
     quotationSummary: 'Quotation Summary',
     selectedPackage: 'Selected Package',
+    confirm: 'Confirm',
+    confirmMessage: 'If you go to the previous step, your current quote data will be reset and you will have to set your quote again. Do you agree ?',
 
   },
 

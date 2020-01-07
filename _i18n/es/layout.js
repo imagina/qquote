@@ -51,6 +51,8 @@ export default {
     selectQuote: 'Selecciona las Opciones a Cotizar',
     quotationSummary: 'Resumen de la Cotización',
     selectedPackage: 'Paquete Seleccionado',
+    confirm: 'Confirmar',
+    confirmMessage: 'Si va al anterior paso, los datos de su actual cotizacion seran reiniciados y debera volver a configurar su cotizacion.¿ Esta de acuerdo ?',
 
   },
 

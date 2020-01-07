@@ -30,7 +30,7 @@
             <div>
               <q-btn
                 v-if="step == 2"
-                @click="$refs.stepper.previous()"
+                @click="showConfirmNextStep"
                 color="red"
                 push
                 size="lg">
@@ -383,7 +383,23 @@
           this.loading = false
         })
       },
-      createItem(){}
+      createItem(){},
+      nextStep(){
+        this.$refs.stepper.previous()
+      },
+      showConfirmNextStep(){
+
+        this.$q.dialog({
+          title: this.$tr('qquote.layout.labels.confirm'),
+          message: this.$tr('qquote.layout.labels.confirmMessage'),
+          cancel: true,
+          persistent: true
+        }).onOk(() => {
+          this.nextStep()
+        }).onCancel(() => {
+
+        })
+      }
     }
   }
 </script>
