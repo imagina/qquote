@@ -208,6 +208,9 @@
     mounted(){
       this.initForm()
     },
+    created(){
+      this.$root.$on('reset', this.resetData)
+    },
     computed:{
       total() {
         let result = 0
@@ -399,6 +402,9 @@
         }).onCancel(() => {
 
         })
+      },
+      resetData(){
+        this.step = 1
       }
     }
   }

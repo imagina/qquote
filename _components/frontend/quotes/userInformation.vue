@@ -225,6 +225,7 @@
     },
     async created(){
       //this.getUsers()
+      this.$root.$on('reset', this.resetData)
       this.validateIsAdmin()
       this.getCountries()
     },
@@ -346,6 +347,16 @@
         let roles = this.$store.getters['quserAuth/userRolesSelect']
         return roles.find( role => role.label == roleName ) || false
       },
+      resetData(){
+        this.firstName = ''
+        this.lastName = ''
+        this.email = ''
+        this.phone = ''
+        this.notes = ''
+        this.value = ''
+        this.userId = ''
+        this.customerId = ''
+      }
     }
   }
 </script>

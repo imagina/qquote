@@ -8,7 +8,7 @@
     </div>
     <div class="col-md-12 q-mt-md" v-if="$q.platform.is.desktop">
       <div class="flex justify-end">
-        <q-btn color="light-green-6" class="q-mr-md" push>
+        <q-btn color="light-green-6" class="q-mr-md" push @click="refreshPage">
           <q-icon left name="fas fa-edit" />
           <div> {{this.$tr('qquote.layout.newQuote')}} </div>
         </q-btn>
@@ -54,7 +54,15 @@
         window.open(`${this.siteUrl}/${this.$store.getters['qsiteSettings/getDefaultLocale']}`, '_blank');
       },
       refreshPage(){
-        location.reload()
+        this.$q.dialog({
+          title: this.$tr('qquote.layout.labels.confirm'),
+          message: 'Antes de continuar debe tener en cuenta que esto re iniciara los datos del formulario',
+          cancel: true,
+          persistent: true
+        }).onOk(() => {
+          this.$root.$emit('reset')
+        }).onCancel(() => {
+        })
       }
     }
   }
