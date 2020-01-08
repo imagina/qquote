@@ -2,7 +2,7 @@
   <div class="row" :style="$q.platform.is.desktop ? 'padding: 13px 19.2%; z-index: 100000;' : '' ">
     <div class="col-md-12" v-if="$q.platform.is.desktop">
       <div class="flex justify-end">
-        <q-btn push color="primary" round icon="launch" size="xs" class="no-shadow" @click="openSiteUrl"/>
+        <q-btn color="primary" round icon="launch" size="xs" class="no-shadow" @click="openSiteUrl"/>
         <b class="text-primary q-ml-sm" style="font-size: 18px;">{{`${siteUrl}/${$store.getters['qsiteSettings/getDefaultLocale']}`}}</b>
       </div>
     </div>
@@ -12,7 +12,7 @@
           <q-icon left name="fas fa-edit" />
           <div> {{this.$tr('qquote.layout.newQuote')}} </div>
         </q-btn>
-        <q-btn color="primary" class="q-mr-md" push>
+        <q-btn color="primary" class="q-mr-md" push @click="refreshPage">
           <q-icon name="fas fa-sync-alt" />
         </q-btn>
         <q-input v-model="model" filled type="search" style="width: 372px" :placeholder="`${$tr('qquote.layout.labels.search')} ...`">
@@ -52,6 +52,9 @@
     methods: {
       openSiteUrl(){
         window.open(`${this.siteUrl}/${this.$store.getters['qsiteSettings/getDefaultLocale']}`, '_blank');
+      },
+      refreshPage(){
+        location.reload()
       }
     }
   }
