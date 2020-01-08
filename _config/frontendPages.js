@@ -5,7 +5,7 @@ export default {
     path: '/',
     name: 'qquote.frontend.quotesCreate',
     page: () => import('@imagina/qquote/_pages/frontend/quotes/create'),
-    layout: () => import('src/layouts/master.vue'),
+    layout: () => import('@imagina/qquote/_layouts/master.vue'),
     title: 'qquote.sidebar.adminQuotes',
     icon: 'fas fa-calculator',
     authenticated: null,
