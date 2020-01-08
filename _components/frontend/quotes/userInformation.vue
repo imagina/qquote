@@ -8,28 +8,46 @@
     <div class="col-md-12 q-mt-lg">
       <div class="row q-col-gutter-md">
         <div class="col-xs-12 col-md-3">
-          <q-input filled v-model="firstName" :label="$tr('qquote.layout.form.firstName')" >
+          <q-input
+            filled
+            v-model="firstName"
+            :label="$tr('qquote.layout.form.firstName')"
+            :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
             <template v-slot:prepend>
               <q-icon name="person" color="primary"/>
             </template>
           </q-input>
         </div>
         <div class="col-xs-12 col-md-3">
-          <q-input filled v-model="lastName" :label="$tr('qquote.layout.form.lastName')">
+          <q-input
+            filled
+            v-model="lastName"
+            :label="$tr('qquote.layout.form.lastName')"
+            :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
             <template v-slot:prepend>
               <q-icon name="person_outline" color="primary"/>
             </template>
           </q-input>
         </div>
         <div class="col-xs-12 col-md-3">
-          <q-input filled v-model="options.identification" :label="$tr('qquote.layout.form.identification')">
+          <q-input
+            filled
+            v-model="options.identification"
+            :label="$tr('qquote.layout.form.identification')"
+            :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
             <template v-slot:prepend>
               <q-icon name="fas fa-address-card" color="primary"/>
             </template>
           </q-input>
         </div>
         <div class="col-xs-12 col-md-3">
-          <q-input filled v-model="options.birthday" mask="date" class="q-pb-none" :label="$tr('qquote.layout.form.dateBirth')">
+          <q-input
+            filled
+            v-model="options.birthday"
+            mask="date"
+            class="q-pb-none"
+            :label="$tr('qquote.layout.form.dateBirth')"
+            :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
             <template v-slot:prepend>
               <q-icon name="event" class="cursor-pointer" color="primary">
                 <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
@@ -41,7 +59,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-12 q-mt-md">
+    <div class="col-md-12 q-mt-none">
       <div class="row q-col-gutter-md">
         <div class="col-xs-12 col-md-3">
           <q-select
@@ -50,7 +68,8 @@
             v-model="options.country"
             :options="dataCountries.countries"
             :label="$tr('qquote.layout.form.country')"
-            @input="getProvinces(options.country.value)">
+            @input="getProvinces(options.country.value)"
+            :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
             <template v-slot:prepend>
               <q-icon name="fas fa-globe-asia" color="primary"/>
             </template>
@@ -63,7 +82,8 @@
             v-model="options.department"
             :options="dataProvinces.provinces"
             :label="$tr('qquote.layout.form.department')"
-            @input="getCities(options.department.value)">
+            @input="getCities(options.department.value)"
+            :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
             <template v-slot:prepend>
               <q-icon name="fas fa-map-marker-alt" color="primary"/>
             </template>
@@ -75,7 +95,8 @@
             filled
             v-model="options.city"
             :options="dataCities.cities"
-            :label="$tr('qquote.layout.form.city')" >
+            :label="$tr('qquote.layout.form.city')"
+            :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
             <template v-slot:prepend>
               <q-icon name="gps_fixed" color="primary"/>
             </template>
@@ -87,7 +108,8 @@
             unmasked-value
             filled
             v-model="phone"
-            :label="$tr('qquote.layout.form.phone')" >
+            :label="$tr('qquote.layout.form.phone')"
+            :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
             <template v-slot:prepend>
               <q-icon name="phone_android" color="primary"/>
             </template>
@@ -95,17 +117,25 @@
         </div>
       </div>
     </div>
-    <div class="col-md-12 q-mt-md">
+    <div class="col-md-12 q-mt-none">
       <div class="row q-col-gutter-md">
         <div class="col-xs-12 col-md-3">
-          <q-input filled v-model="email" :label="$tr('qquote.layout.form.email')" >
+          <q-input
+            filled
+            v-model="email"
+            :label="$tr('qquote.layout.form.email')"
+            :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
             <template v-slot:prepend>
               <q-icon name="email" color="primary"/>
             </template>
           </q-input>
         </div>
         <div class="col-xs-12 col-md-3">
-          <q-input filled v-model="options.currency" :label="$tr('qquote.layout.form.currencyQuoted')">
+          <q-input
+            filled
+            v-model="options.currency"
+            :label="$tr('qquote.layout.form.currencyQuoted')"
+            :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
             <template v-slot:prepend>
               <q-icon name="attach_money" color="primary"/>
             </template>
