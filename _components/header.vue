@@ -1,8 +1,16 @@
 <template>
   <div>
-    <img src="statics/layout/thingy-left.png" class="absolute-top-left">
-    <img src="statics/layout/thingy-right.png" class="absolute-top-right">
-    <img :src="logo" style="position: absolute; left: 370px; top: 12px;">
+    <div class="desktop-only">
+      <img src="statics/layout/thingy-left.png" class="absolute-top-left">
+      <img src="statics/layout/thingy-right.png" class="absolute-top-right">
+      <img :src="logo" style="position: absolute; left: 370px; top: 12px;">
+    </div>
+    <div class="mobile-only">
+      <q-toolbar class="text-primary shadow-1">
+        <img :src="logo" style="width: 20%">
+        <q-toolbar-title>{{projectName}}</q-toolbar-title>
+      </q-toolbar>
+    </div>
   </div>
 </template>
 <script>
