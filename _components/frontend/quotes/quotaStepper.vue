@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-md-12 q-mt-xl">
+    <div class="col-xs-12 col-md-12 q-mt-xl">
       <div class="q-mt-sm q-px-md flex justify-center text-h5 heading-1">
         <span class="text-grey q-px-md"> {{$tr('qquote.layout.labels.make')}} <span class="text-bold text-primary">{{$tr('qquote.layout.labels.quotation')}} </span> </span>
       </div>
@@ -177,10 +177,12 @@
         </q-step>
       </q-stepper>
       <q-separator />
-      <div class="flex flex-center q-mt-lg">
+    </div>
+    <div class="col-xs-12 q-px-sm">
+      <p class="q-mt-md" align="justify">
         <span class="text-primary text-bold" style="font-size: 15px">{{$tr('qquote.layout.labels.important')}}: </span>
         {{$tr('qquote.layout.labels.subImportant')}}.
-      </div>
+      </p>
     </div>
   </div>
 </template>

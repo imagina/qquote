@@ -1,12 +1,17 @@
 <template>
   <div class="row">
-    <div class="col-md-12 q-mt-xl">
+    <div class="col-xs-12 col-md-12 q-mt-xl">
       <div class="q-mt-sm q-px-md flex justify-center text-h5 heading-1">
-        <span class="text-grey q-px-md"> {{$tr('qquote.layout.labels.profile')}} <span class="text-bold text-primary">{{$tr('qquote.layout.labels.customer')}}</span> </span>
+        <span class="text-grey q-px-md">
+          {{$tr('qquote.layout.labels.profile')}}
+          <span class="text-bold text-primary">
+            {{$tr('qquote.layout.labels.customer')}}
+          </span>
+        </span>
       </div>
     </div>
     <div class="col-md-12 q-mt-lg">
-      <div class="row q-col-gutter-md">
+      <div :class="`row ${$q.platform.is.desktop ? 'q-col-gutter-md' : 'q-mx-md'}`">
         <div class="col-xs-12 col-md-3">
           <q-input
             filled
@@ -45,7 +50,6 @@
             filled
             v-model="options.birthday"
             mask="date"
-            class="q-pb-none"
             :label="$tr('qquote.layout.form.dateBirth')"
             :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
             <template v-slot:prepend>
@@ -60,7 +64,7 @@
       </div>
     </div>
     <div class="col-md-12 q-mt-none">
-      <div class="row q-col-gutter-md">
+      <div :class="`row ${$q.platform.is.desktop ? 'q-col-gutter-md' : 'q-mx-md'}`">
         <div class="col-xs-12 col-md-3">
           <q-select
             :loading="dataCountries.loading"
@@ -118,7 +122,7 @@
       </div>
     </div>
     <div class="col-md-12 q-mt-none">
-      <div class="row q-col-gutter-md">
+      <div :class="`row ${$q.platform.is.desktop ? 'q-col-gutter-md' : 'q-mx-md'}`">
         <div class="col-xs-12 col-md-3">
           <q-input
             filled
