@@ -176,6 +176,11 @@
 
         </q-step>
       </q-stepper>
+      <q-separator />
+      <div class="flex flex-center q-mt-lg">
+        <span class="text-primary text-bold" style="font-size: 15px">{{$tr('qquote.layout.labels.important')}}: </span>
+        {{$tr('qquote.layout.labels.subImportant')}}.
+      </div>
     </div>
   </div>
 </template>

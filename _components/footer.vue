@@ -1,5 +1,5 @@
 <template>
-  <div id="footer" style="padding-top: 150px">
+  <div id="footer" style="padding-top: 100px">
     <img src="statics/layout/thingy-left-bottom.png" class="absolute-bottom-left">
     <img src="statics/layout/thingy-right-bottom.png" class="absolute-bottom-right">
     <div class="q-hide q-md-show text-center q-caption text-gre-1 absolute-bottom">

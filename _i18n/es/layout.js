@@ -54,6 +54,8 @@ export default {
     confirm: 'Confirmar',
     confirmMessage: 'Si va al anterior paso, los datos de su actual cotizacion seran reiniciados y debera volver a configurar su cotizacion.¿ Esta de acuerdo ?',
     accreditations: 'Acreditaciones',
+    important: 'Importante',
+    subImportant: 'Los precios están sujetos a cambios por tasa representativa de moneda y cambio de precios de las organizaciones involucradas.'
 
   },
 
