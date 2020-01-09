@@ -258,6 +258,7 @@
       this.$root.$on('reset', this.resetData)
       this.validateIsAdmin()
       this.getCountries()
+      this.isRoleUserCompleteDatabase()
     },
     watch: {
       user: function (val){
@@ -376,6 +377,13 @@
       getRole(rolesToFind){
         let rolesUser = this.$store.getters['quserAuth/userRolesSelect']
         return rolesUser.find( role => role.label == rolesToFind[0] || role.label == rolesToFind[1]  ) || false
+      },
+      isRoleUserCompleteDatabase(){
+        if (this.getRole(['User']) && this.$store.state.quserAuth.userId ){
+          this.firstName = this.$store.state.quserAuth.userData.firstName
+          this.lastName = this.$store.state.quserAuth.userData.lastName
+          this.email = this.$store.state.quserAuth.userData.email
+        }
       },
       resetData(){
         this.firstName = ''
