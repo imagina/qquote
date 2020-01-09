@@ -394,7 +394,7 @@
         })
       },
       createItem(){},
-      nextStep(){
+      previousStep(){
         this.$refs.stepper.previous()
       },
       showConfirmNextStep(){
@@ -405,7 +405,7 @@
           cancel: true,
           persistent: true
         }).onOk(() => {
-          this.nextStep()
+          this.previousStep()
         }).onCancel(() => {
 
         })
