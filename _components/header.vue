@@ -6,7 +6,7 @@
       <img :src="logo" style="position: absolute; left: 370px; top: 12px;">
     </div>
     <div class="mobile-only">
-      <q-toolbar class="text-primary shadow-1">
+      <q-toolbar class="bg-primary text-white">
         <img :src="logo" style="width: 20%">
         <q-toolbar-title>{{projectName}}</q-toolbar-title>
       </q-toolbar>

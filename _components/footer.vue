@@ -18,6 +18,9 @@
       </div>
     </div>
   </div>
+  <div class="mobile-only">
+    <q-toolbar class="bg-primary q-mt-sm"/>
+  </div>
 </div>
 </template>
 <script>
