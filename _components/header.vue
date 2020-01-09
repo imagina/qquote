@@ -6,7 +6,7 @@
       <img :src="logo" style="position: absolute; left: 370px; top: 12px;">
     </div>
     <div class="mobile-only">
-      <q-toolbar class="bg-primary text-white">
+      <q-toolbar class="text-white" style="background-image: linear-gradient(to right, #0059B8 , #008CE1);">
         <img :src="logo" style="width: 20%">
         <q-toolbar-title>{{projectName}}</q-toolbar-title>
       </q-toolbar>

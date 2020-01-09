@@ -19,7 +19,7 @@
     </div>
   </div>
   <div class="mobile-only">
-    <q-toolbar class="bg-primary q-mt-sm"/>
+    <q-toolbar class="q-mt-sm" style="background-image: linear-gradient(to right, #0059B8 , #008CE1);"/>
   </div>
 </div>
 </template>
