@@ -1,5 +1,9 @@
 <template>
-  <div class="row">
+  <q-form
+    ref="formContent"
+    class="row q-gutter-y-md"
+    autocomplete="off"
+    @validation-error="$alert.error($tr('ui.message.formInvalid'))">
     <div class="col-xs-12 col-md-12 q-mt-xl">
       <div class="q-mt-sm q-px-md flex justify-center text-h5 heading-1">
         <span class="text-grey q-px-md">
@@ -10,7 +14,6 @@
         </span>
       </div>
     </div>
-    
     <div class="col-md-12 q-mt-lg">
       <div :class="`row ${$q.platform.is.desktop ? 'q-col-gutter-md' : 'q-mx-md'}`">
         <div class="col-xs-12" v-if="$store.state.quserAuth.userId && hasPermissionToIndexUsers">
@@ -178,7 +181,7 @@
       </div>
     </div>
     <inner-loading :visible="loading"/>
-  </div>
+  </q-form>
 </template>
 
 <script>
@@ -256,6 +259,7 @@
     async created(){
       this.getUsers()
       this.$root.$on('reset', this.resetData)
+      this.$root.$on('validateUserInformation', this.validateData)
       this.validateIsAdmin()
       this.getCountries()
       this.isRoleUserCompleteDatabase()
@@ -394,6 +398,9 @@
         this.value = ''
         this.userId = ''
         this.customerId = ''
+      },
+      validateData(){
+        this.$refs.formContent.validate()
       }
     }
   }

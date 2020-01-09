@@ -124,6 +124,7 @@
               <q-btn
                 size="lg"
                 push
+                @click="saveQuote"
                 icon="mail_outline"
                 type="submit"
                 v-if="step == 4"
@@ -134,6 +135,7 @@
               <q-btn
                 size="lg"
                 push
+                @click="saveQuote"
                 icon="fas fa-download"
                 type="submit"
                 v-if="step == 4"
@@ -370,6 +372,15 @@
         this.$refs.stepper.next()
       },
       saveQuote(){
+        this.$root.$emit('validateUserInformation')
+        
+        if (this.$store.state.qquoteQuotation.firstName  == ''||
+            this.$store.state.qquoteQuotation.lastName  == ''||
+            this.$store.state.qquoteQuotation.email  == ''||
+            this.$store.state.qquoteQuotation.phone == ''){
+          return
+        }
+        
         let data = {
           firstName: this.$store.state.qquoteQuotation.firstName,
           lastName: this.$store.state.qquoteQuotation.lastName,
@@ -382,7 +393,8 @@
         }
         this.loading = true
         this.$crud.create( 'apiRoutes.qquote.quotes', data ).then( response => {
-          this.$router.push({ name: 'qquote.admin.quotes' })
+          //this.$router.push({ name: 'qquote.admin.quotes' })
+          this.$root.$emit('reset')
           this.$alert.success({ message: `${this.$tr('ui.message.recordCreated')} ID: ${response.data.id}` })
           this.loading = false
         }).catch( error => {
