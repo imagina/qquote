@@ -10,8 +10,31 @@
         </span>
       </div>
     </div>
+    
     <div class="col-md-12 q-mt-lg">
       <div :class="`row ${$q.platform.is.desktop ? 'q-col-gutter-md' : 'q-mx-md'}`">
+        <div class="col-xs-12" v-if="$store.state.quserAuth.userId && hasPermissionToIndexUsers">
+          <q-select
+            filled
+            v-model="user"
+            use-input
+            hide-selected
+            fill-input
+            input-debounce="0"
+            label="Usuarios"
+            :options="users">
+            <template v-slot:prepend>
+              <q-icon name="fas fa-users" color="primary"/>
+            </template>
+            <template v-slot:no-option>
+              <q-item>
+                <q-item-section class="text-grey">
+                  {{ $tr('qquote.layout.labels.noResults') }}
+                </q-item-section>
+              </q-item>
+            </template>
+          </q-select>
+        </div>
         <div class="col-xs-12 col-md-3">
           <q-input
             filled
@@ -226,9 +249,12 @@
           this.$store.dispatch('qquoteQuotation/set_customer_id', newValue)
         }
       },
+      hasPermissionToIndexUsers(){
+        return this.getRole(['Admin', 'Superdmin'])
+      }
     },
     async created(){
-      //this.getUsers()
+      this.getUsers()
       this.$root.$on('reset', this.resetData)
       this.validateIsAdmin()
       this.getCountries()
@@ -280,7 +306,7 @@
     },
     methods:{
       getUsers(){
-        if (this.$store.state.quserAuth.userId) {
+        if (this.$store.state.quserAuth.userId && this.hasPermissionToIndexUsers) {
           this.loading = true
           this.$crud.index('apiRoutes.quser.users', { params: {} } ).then( response => {
             this.users = Object.freeze(response.data.map( user => ({label: user.fullName, value: user})))
@@ -347,9 +373,9 @@
           this.userId = null
         }
       },
-      getRole(roleName){
-        let roles = this.$store.getters['quserAuth/userRolesSelect']
-        return roles.find( role => role.label == roleName ) || false
+      getRole(rolesToFind){
+        let rolesUser = this.$store.getters['quserAuth/userRolesSelect']
+        return rolesUser.find( role => role.label == rolesToFind[0] || role.label == rolesToFind[1]  ) || false
       },
       resetData(){
         this.firstName = ''
