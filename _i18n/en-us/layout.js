@@ -53,6 +53,7 @@ export default {
     selectedPackage: 'Selected Package',
     confirm: 'Confirm',
     confirmMessage: 'If you go to the previous step, your current quote data will be reset and you will have to set your quote again. Do you agree ?',
+    accreditations: 'Accreditations',
 
   },
 

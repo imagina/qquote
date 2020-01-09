@@ -53,6 +53,7 @@ export default {
     selectedPackage: 'Paquete Seleccionado',
     confirm: 'Confirmar',
     confirmMessage: 'Si va al anterior paso, los datos de su actual cotizacion seran reiniciados y debera volver a configurar su cotizacion.¿ Esta de acuerdo ?',
+    accreditations: 'Acreditaciones',
 
   },
 
