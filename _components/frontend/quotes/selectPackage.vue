@@ -1,5 +1,5 @@
 <template>
-  <div class="row" style="min-height: 100px">
+  <div class="row" style="min-height: 50px">
     <q-list class="col-12 rounded-borders no-border bg-grey-2 text-grey-7 border-bottom-inactive">
       <q-item
         v-for="(item, index) in packages"
