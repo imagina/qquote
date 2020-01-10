@@ -300,14 +300,17 @@
           this.loading = false
         })
       },
+      /* This method generates a new array with the products in the package, adding a feature tree. */
       formatProducts(products){
         return products.map( product => ({ ...product , characteristics: this.$array.builTree( product.characteristics )}))
       },
+      /* Sum totals of Selected features. */
       sumChildren( children ){
         let calculate = 0
         children.forEach( element => { calculate += this.sumCharacteristics( element )})
         return calculate
       },
+      /* Add the characteristics according to the type. */
       sumCharacteristics( characteristic ){
 
         /*if characteristic is disabled*/
@@ -418,7 +421,6 @@
           this.loading = false
         })
       },
-      createItem(){},
       previousStep(){
         this.$refs.stepper.previous()
       },
