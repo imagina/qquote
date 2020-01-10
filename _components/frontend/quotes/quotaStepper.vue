@@ -372,26 +372,39 @@
         this.$refs.stepper.next()
       },
       saveQuote(){
+        // this emit global event for validate form with user data informations
         this.$root.$emit('validateUserInformation')
         
-        if (this.$store.state.qquoteQuotation.firstName  == ''||
-            this.$store.state.qquoteQuotation.lastName  == ''||
-            this.$store.state.qquoteQuotation.email  == ''||
-            this.$store.state.qquoteQuotation.phone == ''){
+        // If any of the follow attributes is empty, cut flow in this methods.
+        if (
+          this.$store.state.qquoteQuotation.firstName  == ''||
+          this.$store.state.qquoteQuotation.lastName  == ''||
+          this.$store.state.qquoteQuotation.options.identification  == ''||
+          this.$store.state.qquoteQuotation.options.dateBirth  == ''||
+          this.$store.state.qquoteQuotation.options.country  == ''||
+          this.$store.state.qquoteQuotation.options.department  == ''||
+          this.$store.state.qquoteQuotation.options.city  == ''||
+          this.$store.state.qquoteQuotation.options.currency  == ''||
+          this.$store.state.qquoteQuotation.email  == ''||
+          this.$store.state.qquoteQuotation.phone == ''
+        ){
           return
         }
-        
+        // Organize data for send
         let data = {
           firstName: this.$store.state.qquoteQuotation.firstName,
           lastName: this.$store.state.qquoteQuotation.lastName,
           email: this.$store.state.qquoteQuotation.email,
           phone: this.$store.state.qquoteQuotation.phone,
           notes: this.$store.state.qquoteQuotation.notes,
+          options: this.$store.state.qquoteQuotation.options,
           value: this.products,
           userId: this.$store.state.qquoteQuotation.userId,
           customerId: this.$store.state.qquoteQuotation.customerId,
         }
         this.loading = true
+        
+        // call request to server for send data
         this.$crud.create( 'apiRoutes.qquote.quotes', data ).then( response => {
           //this.$router.push({ name: 'qquote.admin.quotes' })
           this.$root.$emit('reset')

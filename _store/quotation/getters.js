@@ -49,3 +49,26 @@ export const getProductsSelected = ( state ) => (
 export const getProducts = ( state ) => (
   state.products
 )
+
+export const getIdentification = ( state ) => (
+  state.options.identification
+)
+
+export const getBirthday = ( state ) => (
+  state.options.birthday
+)
+
+export const getCountry = ( state ) => (
+  state.options.country
+)
+
+export const getDepartment = ( state ) => (
+  state.options.department
+)
+
+export const getCity = ( state ) => (
+  state.options.city
+)
+export const getCurrency = ( state ) => (
+  state.options.currency
+)

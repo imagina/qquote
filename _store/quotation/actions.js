@@ -53,3 +53,27 @@ export const set_products = ( { commit }, payload ) => (
 export const reset_state = ( { commit } ) => (
   commit( 'RESET_STATE' )
 )
+
+export const set_identification = ( { commit }, payload ) => (
+  commit( 'SET_IDENTIFICATION', payload )
+)
+
+export const set_birthday = ( { commit }, payload ) => (
+  commit( 'SET_BIRTHDAY', payload )
+)
+
+export const set_country = ( { commit }, payload ) => (
+  commit( 'SET_COUNTRY', payload )
+)
+
+export const set_department = ( { commit }, payload ) => (
+  commit( 'SET_DEPARTMENT', payload )
+)
+
+export const set_city = ( { commit }, payload ) => (
+  commit( 'SET_CITY', payload )
+)
+
+export const set_currency = ( { commit }, payload ) => (
+  commit( 'SET_CURRENCY', payload )
+)

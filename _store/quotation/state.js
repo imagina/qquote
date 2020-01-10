@@ -12,4 +12,12 @@ export default {
   package: {},
   productsSelected: [],
   products: [],
+  options: {
+    identification: '',
+    birthday: '',
+    country: '',
+    department: '',
+    city: '',
+    currency: '',
+  }
 }

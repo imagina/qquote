@@ -63,7 +63,7 @@
         <div class="col-xs-12 col-md-3">
           <q-input
             filled
-            v-model="options.identification"
+            v-model="identification"
             :label="$tr('qquote.layout.form.identification')"
             :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
             <template v-slot:prepend>
@@ -74,14 +74,14 @@
         <div class="col-xs-12 col-md-3">
           <q-input
             filled
-            v-model="options.birthday"
+            v-model="birthday"
             mask="date"
             :label="$tr('qquote.layout.form.dateBirth')"
             :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
             <template v-slot:prepend>
               <q-icon name="event" class="cursor-pointer" color="primary">
                 <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
-                  <q-date v-model="options.birthday" @input="() => $refs.qDateProxy.hide()" />
+                  <q-date v-model="birthday" @input="() => $refs.qDateProxy.hide()" />
                 </q-popup-proxy>
               </q-icon>
             </template>
@@ -95,10 +95,10 @@
           <q-select
             :loading="dataCountries.loading"
             filled
-            v-model="options.country"
+            v-model="country"
             :options="dataCountries.countries"
             :label="$tr('qquote.layout.form.country')"
-            @input="getProvinces(options.country.value)"
+            @input="getProvinces(country.value)"
             :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
             <template v-slot:prepend>
               <q-icon name="fas fa-globe-asia" color="primary"/>
@@ -109,10 +109,10 @@
           <q-select
             :loading="dataProvinces.loading"
             filled
-            v-model="options.department"
+            v-model="department"
             :options="dataProvinces.provinces"
             :label="$tr('qquote.layout.form.department')"
-            @input="getCities(options.department.value)"
+            @input="getCities(department.value)"
             :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
             <template v-slot:prepend>
               <q-icon name="fas fa-map-marker-alt" color="primary"/>
@@ -123,7 +123,7 @@
           <q-select
             :loading="dataCities.loading"
             filled
-            v-model="options.city"
+            v-model="city"
             :options="dataCities.cities"
             :label="$tr('qquote.layout.form.city')"
             :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
@@ -163,7 +163,7 @@
         <div class="col-xs-12 col-md-3">
           <q-input
             filled
-            v-model="options.currency"
+            v-model="currency"
             :label="$tr('qquote.layout.form.currencyQuoted')"
             :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
             <template v-slot:prepend>
@@ -252,6 +252,54 @@
           this.$store.dispatch('qquoteQuotation/set_customer_id', newValue)
         }
       },
+      identification: {
+        get: function () {
+          return this.$store.state.qquoteQuotation.options.identification
+        },
+        set: function (newValue) {
+          this.$store.dispatch('qquoteQuotation/set_identification', newValue)
+        }
+      },
+      birthday: {
+        get: function () {
+          return this.$store.state.qquoteQuotation.options.birthday
+        },
+        set: function (newValue) {
+          this.$store.dispatch('qquoteQuotation/set_birthday', newValue)
+        }
+      },
+      country: {
+        get: function () {
+          return this.$store.state.qquoteQuotation.options.country
+        },
+        set: function (newValue) {
+          this.$store.dispatch('qquoteQuotation/set_country', newValue)
+        }
+      },
+      department: {
+        get: function () {
+          return this.$store.state.qquoteQuotation.options.department
+        },
+        set: function (newValue) {
+          this.$store.dispatch('qquoteQuotation/set_department', newValue)
+        }
+      },
+      city: {
+        get: function () {
+          return this.$store.state.qquoteQuotation.options.city
+        },
+        set: function (newValue) {
+          this.$store.dispatch('qquoteQuotation/set_city', newValue)
+        }
+      },
+      currency: {
+        get: function () {
+          return this.$store.state.qquoteQuotation.options.currency
+        },
+        set: function (newValue) {
+          this.$store.dispatch('qquoteQuotation/set_currency', newValue)
+        }
+      },
       hasPermissionToIndexUsers(){
         return this.getRole(['Admin', 'Superdmin'])
       }
@@ -296,17 +344,8 @@
           cities:[],
           loading: false,
         },
-
         user: {},
         model: '',
-        options: {
-          identification: '',
-          birthday: '',
-          country: '',
-          department: '',
-          city: '',
-          currency: '',
-        }
       }
     },
     methods:{
@@ -398,6 +437,13 @@
         this.value = ''
         this.userId = ''
         this.customerId = ''
+        this.options.identification = ''
+        this.options.dateBirth = ''
+        this.options.country = ''
+        this.options.department = ''
+        this.options.city = ''
+        this.options.currency = ''
+        this.$refs.formContent.resetValidation()
       },
       validateData(){
         this.$refs.formContent.validate()

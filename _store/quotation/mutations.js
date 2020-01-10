@@ -60,3 +60,22 @@ export const RESET_STATE = ( state ) => {
   state.phone = ''
   state.notes = ''
 }
+
+export const SET_IDENTIFICATION = ( state, payload ) => {
+  state.options.identification = payload
+}
+export const SET_BIRTHDAY = ( state, payload ) => {
+  state.options.birthday = payload
+}
+export const SET_COUNTRY = ( state, payload ) => {
+  state.options.country = payload
+}
+export const SET_DEPARTMENT = ( state, payload ) => {
+  state.options.department = payload
+}
+export const SET_CITY = ( state, payload ) => {
+  state.options.city = payload
+}
+export const SET_CURRENCY = ( state, payload ) => {
+  state.options.currency = payload
+}
