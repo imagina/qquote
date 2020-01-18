@@ -74,5 +74,9 @@ export default {
     value: 'Valores',
     userId: 'Usuario',
     customerId: 'Cliente',
+    fake:{
+      name: 'Nombre',
+      categories: 'Categorias',
+    }
   }
 }
