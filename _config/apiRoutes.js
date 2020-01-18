@@ -11,4 +11,7 @@ export default {
   characteristics: `${urlBase}/characteristics`,
   types: `${urlBase}/types`,
   quotes: `${urlBase}/quotes`,
+  send: `${urlBase}/quotes/send`,
+  download: `${urlBase}/quotes/download`,
+  configs: `${urlBase}/configs`,
 }
