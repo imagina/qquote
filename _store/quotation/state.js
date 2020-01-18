@@ -18,6 +18,9 @@ export default {
     country: '',
     department: '',
     city: '',
-    currency: '',
-  }
+    currency: {
+      "label": "AUD",
+      "value": 5
+    },
+  },
 }

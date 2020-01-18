@@ -8,7 +8,14 @@
             <q-icon name="arrow_right_alt" size="xl"/>
           </div>
           <div class="q-pt-xs">
-            <div class="text-h5 text-bold">{{$store.state.qquoteQuotation.package.name}}</div>
+            <div class="text-h5 text-bold">
+              {{$store.state.qquoteQuotation.package.name}}
+              <q-icon name="info" color="grey-7">
+                <q-tooltip>
+                  <span v-html="$store.state.qquoteQuotation.package.description"></span>
+                </q-tooltip>
+              </q-icon>
+            </div>
             <div class="text-bold">{{$tr('qquote.layout.labels.selectedPackage')}}</div>
           </div>
         </div>
