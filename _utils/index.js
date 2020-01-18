@@ -33,3 +33,7 @@ export const keysToCamel = (o) => {
   }
   return o
 }
+
+export const translateCurrency = (value, locale, currency) => {
+  new Intl.NumberFormat(locale, { style: 'currency', currency: currency }).format(value)
+}
