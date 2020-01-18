@@ -47,7 +47,7 @@
 
               <div class="q-pr-md" style="min-width: 300px">
                 <div style="border-radius: 5px; border: 1px solid silver; padding: 9px; font-size: 24px" class="text-primary text-bold">
-                  {{$trc(total || 0 )}}
+                  {{$trc(total || 0 , $store.state.qquoteQuotation.options.currency.label)}}
                 </div>
               </div>
 
@@ -75,7 +75,7 @@
               push />
             <q-toolbar-title>
               <div class="q-pr-md text-primary text-bold" >
-                {{$trc(total || 0 )}}
+                {{$trc(total || 0 , $store.state.qquoteQuotation.options.currency.label)}}
               </div>
             </q-toolbar-title>
             <q-btn
@@ -117,14 +117,14 @@
 
               <div class="q-pr-md" style="min-width: 300px">
                 <div style="border-radius: 5px; border: 1px solid silver; padding: 9px; font-size: 24px" class="text-primary text-bold">
-                  {{$trc(total || 0 )}}
+                  {{$trc(total || 0 , $store.state.qquoteQuotation.options.currency.label)}}
                 </div>
               </div>
 
               <q-btn
                 size="lg"
                 push
-                @click="saveQuote"
+                @click="saveQuote('send')"
                 icon="mail_outline"
                 type="submit"
                 v-if="step == 4"
@@ -135,7 +135,7 @@
               <q-btn
                 size="lg"
                 push
-                @click="saveQuote"
+                @click="saveQuote('download')"
                 icon="fas fa-download"
                 type="submit"
                 v-if="step == 4"
@@ -156,7 +156,7 @@
 
             <q-toolbar-title>
               <div class="q-pr-md text-primary text-bold" >
-                {{$trc(total || 0 )}}
+                {{$trc(total || 0 , $store.state.qquoteQuotation.options.currency.label)}}
               </div>
             </q-toolbar-title>
             <q-btn
@@ -186,6 +186,9 @@
         {{$tr('qquote.layout.labels.subImportant')}}.
       </p>
     </div>
+    <modalShow
+      :quote="quoteSaved"
+      :dialog="showQuoteSaved"/>
   </div>
 </template>
 
@@ -195,16 +198,23 @@
   import summaryQutation from '@imagina/qquote/_components/frontend/quotes/summaryQutation'
   import userInformation from '@imagina/qquote/_components/frontend/quotes/userInformation'
   import selectPackages from '@imagina/qquote/_components/frontend/quotes/selectPackage'
+  import modalShow from '@imagina/qquote/_components/frontend/quotes/show'
   import { keysToCamel } from '@imagina/qquote/_utils/index'
 
   export default {
     name: 'quotaStepper',
+    props:{
+      fakeFields: {
+        default: () => []
+      }
+    },
     components:{
       userInformation,
       quotation,
       productOrPackage,
       summaryQutation,
-      selectPackages
+      selectPackages,
+      modalShow
     },
     data () {
       return {
@@ -212,6 +222,8 @@
         step: 1,
         products: [],
         itemId: false,
+        quoteSaved: {},
+        showQuoteSaved: false,
       }
     },
     mounted(){
@@ -219,6 +231,7 @@
     },
     created(){
       this.$root.$on('reset', this.resetData)
+      this.$root.$on('changeCurrency', this.changeCurrency)
     },
     computed:{
       total() {
@@ -274,11 +287,13 @@
         this.$store.dispatch('qquoteQuotation/set_user_id', data.userId)
         this.$store.dispatch('qquoteQuotation/set_customer_id', data.customerId)
       },
-      getProducts(){
+      getProducts(currency = 'AUD'){
         let params = {
           params: {
             include: 'characteristics',
-            filter: {}
+            filter: {
+              currency: currency
+            }
           }
         }
         if (this.$store.state.qquoteQuotation.productOrPackage == 'product'){
@@ -374,10 +389,10 @@
         /*If all is OK pass to next step*/
         this.$refs.stepper.next()
       },
-      saveQuote(){
+      saveQuote( sendOrDownload = null ){
         // this emit global event for validate form with user data informations
         this.$root.$emit('validateUserInformation')
-        
+
         // If any of the follow attributes is empty, cut flow in this methods.
         if (
           this.$store.state.qquoteQuotation.firstName  == ''||
@@ -405,12 +420,23 @@
           userId: this.$store.state.qquoteQuotation.userId,
           customerId: this.$store.state.qquoteQuotation.customerId,
         }
+
+        for( let item of Object.keys(this.fakeFields)){
+          data.options[item] = this.fakeFields[item].value
+        }
+
+        if (sendOrDownload == 'send'){
+          data['isSending'] = true
+        }
+        if(sendOrDownload == 'download'){
+          data['IsDownloading'] = true
+        }
+
         this.loading = true
-        
+
         // call request to server for send data
         this.$crud.create( 'apiRoutes.qquote.quotes', data ).then( response => {
-          //this.$router.push({ name: 'qquote.admin.quotes' })
-          this.$root.$emit('reset')
+          this.postSavedQuote(response, sendOrDownload)
           this.$alert.success({ message: `${this.$tr('ui.message.recordCreated')} ID: ${response.data.id}` })
           this.loading = false
         }).catch( error => {
@@ -420,6 +446,29 @@
           })
           this.loading = false
         })
+      },
+      postSavedQuote(response, sendOrDownload = null){
+
+        /* Send quote */
+        if(sendOrDownload == 'send'){
+            // Show alert with information for send email
+        }
+        /* Download quote */
+        if(sendOrDownload == 'download'){
+          window.open(`${response.isDownloading}`, '_blank');
+        }
+
+        /* User with session */
+        if (this.$store.state.quserAuth.userId){
+          this.$router.push({ name: 'qquote.admin.quotes' })
+        }
+
+        /*User no Session*/
+        if (!this.$store.state.quserAuth.userId){
+          this.quoteSaved = response.data
+          this.showQuoteSaved = true
+        }
+        this.$root.$emit('reset')
       },
       previousStep(){
         this.$refs.stepper.previous()
@@ -439,6 +488,9 @@
       },
       resetData(){
         this.step = 1
+      },
+      changeCurrency(event){
+        this.getProducts(event.label)
       }
     }
   }

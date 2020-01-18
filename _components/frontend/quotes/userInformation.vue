@@ -161,15 +161,18 @@
           </q-input>
         </div>
         <div class="col-xs-12 col-md-3">
-          <q-input
+          <q-select
+            :loading="dataCountries.loading"
             filled
             v-model="currency"
+            :options="dataCurrencies.currencies"
             :label="$tr('qquote.layout.form.currencyQuoted')"
+            @input="emitEventChangeCurrency"
             :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
             <template v-slot:prepend>
               <q-icon name="attach_money" color="primary"/>
             </template>
-          </q-input>
+          </q-select>
         </div>
         <div class="col-xs-12 col-md-6">
           <q-input filled v-model="notes" :label="$tr('qquote.layout.form.notes')">
@@ -180,6 +183,17 @@
         </div>
       </div>
     </div>
+    <div class="col-md-12 q-mt-none">
+      <div :class="`row ${$q.platform.is.desktop ? 'q-col-gutter-md' : 'q-mx-md'}`">
+        <div v-for="(field, key) in fakeFields" :key="key" :ref="key" :class="field.className">
+          <dynamic-field
+            :filled="true"
+            :key="key"
+            v-model="field.value"
+            :field="field" />
+        </div>
+      </div>
+    </div>
     <inner-loading :visible="loading"/>
   </q-form>
 </template>
@@ -187,6 +201,11 @@
 <script>
   export default {
     name: "userInformation",
+    props:{
+      fakeFields: {
+        default: () => []
+      }
+    },
     computed:{
       firstName: {
         get: function () {
@@ -302,10 +321,11 @@
       },
       hasPermissionToIndexUsers(){
         return this.getRole(['Admin', 'Superdmin'])
-      }
+      },
     },
     async created(){
       this.getUsers()
+      this.getCurrencies()
       this.$root.$on('reset', this.resetData)
       this.$root.$on('validateUserInformation', this.validateData)
       this.validateIsAdmin()
@@ -340,6 +360,10 @@
           provinces:[],
           loading: false,
         },
+        dataCurrencies: {
+          currencies:[],
+          loading: false,
+        },
         dataCities: {
           cities:[],
           loading: false,
@@ -361,6 +385,26 @@
             this.loading = false
           })
         }
+      },
+      getCurrencies(){
+        this.dataCurrencies.loading = true
+        let params = {
+          params: {
+            filter: {
+              status : 1
+            }
+          }
+        }
+        this.$crud.index('apiRoutes.qcurrency.currencies', params ).then( response => {
+          this.dataCurrencies.currencies = Object.freeze(response.data.map( currency => ({label: currency.code, value: currency.id})))
+          this.dataCurrencies.loading = false
+        }).catch( error => {
+          this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+          this.dataCurrencies.loading = false
+        })
+      },
+      emitEventChangeCurrency(){
+        this.$root.$emit('changeCurrency', this.currency)
       },
       getCountries(){
         this.dataCountries.loading = true
@@ -429,6 +473,7 @@
         }
       },
       resetData(){
+        this.$refs.formContent.resetValidation()
         this.firstName = ''
         this.lastName = ''
         this.email = ''
@@ -437,17 +482,20 @@
         this.value = ''
         this.userId = ''
         this.customerId = ''
-        this.options.identification = ''
-        this.options.dateBirth = ''
-        this.options.country = ''
-        this.options.department = ''
-        this.options.city = ''
-        this.options.currency = ''
-        this.$refs.formContent.resetValidation()
+        this.identification = ''
+        this.dateBirth = ''
+        this.country = ''
+        this.department = ''
+        this.city = ''
+        this.currency = {
+          "label": "AUD",
+          "value": 5
+        }
+        console.warn('reseting data in user information component')
       },
       validateData(){
         this.$refs.formContent.validate()
-      }
+      },
     }
   }
 </script>

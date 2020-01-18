@@ -22,8 +22,14 @@
         </q-input>
       </div>
     </div>
-    <userInformation class="col-md-12"/>
-    <quotaStepper class="col-md-12"/>
+
+    <userInformation
+      class="col-md-12"
+      :fakeFields="fakeFields"/>
+    <quotaStepper
+      class="col-md-12"
+      :fakeFields="fakeFields"/>
+
   </div>
 </template>
 
@@ -38,6 +44,7 @@
     created(){
       this.siteUrl = env("BASE_URL")
       this.$store.dispatch('qquoteQuotation/reset_state')
+      this.getFakeFields()
     },
     data () {
       return {
@@ -46,7 +53,9 @@
         step: 1,
         done1: false,
         done2: false,
-        done3: false
+        done3: false,
+        fakeFields: [],
+        loading: false,
       }
     },
     methods: {
@@ -63,7 +72,24 @@
           this.$root.$emit('reset')
         }).onCancel(() => {
         })
-      }
+      },
+      getFakeFields () {
+        this.loading = true
+        let params = {
+          params: {
+            filter: {
+              entity : 'quote'
+            }
+          }
+        }
+        this.$crud.index('apiRoutes.qquote.configs', params ).then( response => {
+          this.fakeFields = response.data
+          this.loading = false
+        }).catch( error => {
+          this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+          this.loading = false
+        })
+      },
     }
   }
 </script>
