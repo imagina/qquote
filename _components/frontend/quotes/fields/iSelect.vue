@@ -12,7 +12,7 @@
       <div class="col-xs-12 col-md-4">
         {{$tr('qquote.layout.labels.total')}}
         <div style="border-radius: 5px; border: 1px solid silver; padding: 9px; font-size: 24px" class="text-primary text-bold">
-          {{$trc(characteristic.model.price || 0 )}}
+          {{$trc(characteristic.model.price || 0 , $store.state.qquoteQuotation.options.currency.label)}}
         </div>
       </div>
     </div>
