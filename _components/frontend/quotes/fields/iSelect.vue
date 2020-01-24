@@ -19,6 +19,7 @@
     <div class="row">
       <div class="col-xs-12 col-md-8 q-pr-md q-pt-md">
         <q-input
+          type="textarea"
           v-if="characteristic.withNotes"
           color="primary"
           outlined
