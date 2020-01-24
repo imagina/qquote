@@ -16,7 +16,7 @@
             :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
             :label="`${$tr('ui.form.name')} (${locale.language}) `"
             type="text" v-model="locale.formTemplate.name" outlined dense/>
-          <q-input
+          <q-editor
             :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
             :label="`${$tr('ui.form.description')} (${locale.language}) `"
             type="textarea" v-model="locale.formTemplate.description" outlined dense/>
