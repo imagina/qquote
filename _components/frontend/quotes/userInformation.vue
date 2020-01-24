@@ -60,12 +60,11 @@
             </template>
           </q-input>
         </div>
-        <div class="col-xs-12 col-md-3">
+        <div class="col-xs-12 col-md-3" v-if="false">
           <q-input
             filled
             v-model="identification"
-            :label="$tr('qquote.layout.form.identification')"
-            :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
+            :label="$tr('qquote.layout.form.identification')">
             <template v-slot:prepend>
               <q-icon name="fas fa-address-card" color="primary"/>
             </template>
@@ -87,10 +86,6 @@
             </template>
           </q-input>
         </div>
-      </div>
-    </div>
-    <div class="col-md-12 q-mt-none">
-      <div :class="`row ${$q.platform.is.desktop ? 'q-col-gutter-md' : 'q-mx-md'}`">
         <div class="col-xs-12 col-md-3">
           <q-select
             :loading="dataCountries.loading"
@@ -105,32 +100,45 @@
             </template>
           </q-select>
         </div>
-        <div class="col-xs-12 col-md-3">
+      </div>
+    </div>
+    <div class="col-md-12 q-mt-none">
+      <div :class="`row ${$q.platform.is.desktop ? 'q-col-gutter-md' : 'q-mx-md'}`">
+        <div class="col-xs-12 col-md-3" v-if="false">
           <q-select
             :loading="dataProvinces.loading"
             filled
             v-model="department"
             :options="dataProvinces.provinces"
             :label="$tr('qquote.layout.form.department')"
-            @input="getCities(department.value)"
-            :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
+            @input="getCities(department.value)">
             <template v-slot:prepend>
               <q-icon name="fas fa-map-marker-alt" color="primary"/>
             </template>
           </q-select>
         </div>
-        <div class="col-xs-12 col-md-3">
+        <div class="col-xs-12 col-md-3" v-if="false">
           <q-select
             :loading="dataCities.loading"
             filled
             v-model="city"
             :options="dataCities.cities"
-            :label="$tr('qquote.layout.form.city')"
-            :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
+            :label="$tr('qquote.layout.form.city')">
             <template v-slot:prepend>
               <q-icon name="gps_fixed" color="primary"/>
             </template>
           </q-select>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <q-input
+            filled
+            v-model="email"
+            :label="$tr('qquote.layout.form.email')"
+            :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
+            <template v-slot:prepend>
+              <q-icon name="email" color="primary"/>
+            </template>
+          </q-input>
         </div>
         <div class="col-xs-12 col-md-3">
           <q-input
@@ -142,21 +150,6 @@
             :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
             <template v-slot:prepend>
               <q-icon name="phone_android" color="primary"/>
-            </template>
-          </q-input>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-12 q-mt-none">
-      <div :class="`row ${$q.platform.is.desktop ? 'q-col-gutter-md' : 'q-mx-md'}`">
-        <div class="col-xs-12 col-md-3">
-          <q-input
-            filled
-            v-model="email"
-            :label="$tr('qquote.layout.form.email')"
-            :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
-            <template v-slot:prepend>
-              <q-icon name="email" color="primary"/>
             </template>
           </q-input>
         </div>
@@ -174,7 +167,11 @@
             </template>
           </q-select>
         </div>
-        <div class="col-xs-12 col-md-6">
+      </div>
+    </div>
+    <div class="col-md-12 q-mt-none">
+      <div :class="`row ${$q.platform.is.desktop ? 'q-col-gutter-md' : 'q-mx-md'}`">
+        <div class="col-xs-12 col-md-12">
           <q-input filled v-model="notes" :label="$tr('qquote.layout.form.notes')">
             <template v-slot:prepend>
               <q-icon name="fas fa-comment-dots" color="primary"/>

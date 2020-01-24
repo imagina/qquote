@@ -397,11 +397,8 @@
         if (
           this.$store.state.qquoteQuotation.firstName  == ''||
           this.$store.state.qquoteQuotation.lastName  == ''||
-          this.$store.state.qquoteQuotation.options.identification  == ''||
           this.$store.state.qquoteQuotation.options.dateBirth  == ''||
           this.$store.state.qquoteQuotation.options.country  == ''||
-          this.$store.state.qquoteQuotation.options.department  == ''||
-          this.$store.state.qquoteQuotation.options.city  == ''||
           this.$store.state.qquoteQuotation.options.currency  == ''||
           this.$store.state.qquoteQuotation.email  == ''||
           this.$store.state.qquoteQuotation.phone == ''
