@@ -55,7 +55,10 @@ export default {
     confirmMessage: 'If you go to the previous step, your current quote data will be reset and you will have to set your quote again. Do you agree ?',
     accreditations: 'Accreditations',
     important: 'Important',
-    subImportant: 'Prices are subject to changes by representative currency rate and price change of the organizations involved.'
+    subImportant: 'Prices are subject to changes by representative currency rate and price change of the organizations involved.',
+    allProducts: 'All the products',
+    customPackage: 'Custom Package',
+
 
   },
 
