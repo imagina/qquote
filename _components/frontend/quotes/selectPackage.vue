@@ -55,6 +55,13 @@
         this.loading = true
         this.$crud.index('apiRoutes.qquote.packages', params).then( response => {
           this.packages = response.data
+          if (this.$store.getters['qsiteSettings/getSettingValueByName']('iquote::allow_custom_package')){
+            this.packages.push({
+              id: -1,
+              name: this.$tr('qquote.layout.labels.allProducts'),
+              description: this.$tr('qquote.layout.labels.customPackage')
+            })
+          }
           this.loading = false
         }).catch( error => {
           this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
@@ -76,6 +83,6 @@
     border-bottom: 2px solid #9e9e9e42;
   }
   .border-bottom{
-  
+
   }
 </style>
