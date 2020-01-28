@@ -14,10 +14,35 @@
       </div>
 
     </div>
+    
+    <div v-if="characteristic.searcheable" class="col-xs-12 col-md-12 q-mt-md">
+      <q-select
+        filled
+        v-model="model"
+        :options="characteristic.children.map( item => ({label: item.name, value: item.id}))"
+        label="Select Options"
+        multiple
+        emit-value
+        map-options>
+        <template v-slot:option="scope">
+          <q-item
+            v-bind="scope.itemProps"
+            v-on="scope.itemEvents">
+            <q-item-section>
+              <q-item-label v-html="scope.opt.label" ></q-item-label>
+            </q-item-section>
+            <q-item-section side>
+              <q-toggle v-model="model" :val="scope.opt.value" />
+            </q-item-section>
+          </q-item>
+        </template>
+      </q-select>
+    </div>
+    
     <div class="col-xs-12 col-md-12 q-mt-md">
       <div v-if="characteristic.children">
         <div v-for="(item, index) in characteristic.children">
-          <div v-if="characteristic.model">
+          <div v-if="characteristic.model && showCharacteristic(item.id)">
             <fieldContainer
               :characteristic="item"/>
           </div>
@@ -37,12 +62,25 @@
     props:{
       characteristic:{
         type: Object,
-        default: () => {}
+        default: () => {
+          searcheable: false
+        }
       }
     },
     data () {
       return {
-        model: false
+        model: []
+      }
+    },
+    methods:{
+      showCharacteristic(characteristic){
+        if(this.characteristic.searcheable == false){
+          return true
+        }
+        if (this.model.includes(characteristic)){
+          return true
+        }
+        return false
       }
     }
   }
