@@ -237,9 +237,11 @@
       total() {
         let result = 0
         this.products.forEach( product => {
-          product.characteristics.forEach( characteristic => {
-            result += this.sumCharacteristics(characteristic)
-          })
+          if (product.checked){
+            product.characteristics.forEach( characteristic => {
+              result += this.sumCharacteristics(characteristic)
+            })
+          }
         })
         return result
       },
