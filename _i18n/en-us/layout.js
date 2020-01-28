@@ -23,6 +23,7 @@ export default {
   min: 'Minimum',
   max: 'Maximum',
   withNotes: 'With Notes',
+  searcheable: 'Searcheable',
 
   labels:{
     informationUser: 'User Information',
