@@ -42,6 +42,10 @@
           <q-checkbox
             :label="`${$tr('qquote.layout.withNotes')}`"
             v-model="locale.formTemplate.withNotes" />
+          <br>
+          <q-checkbox
+            :label="`${$tr('qquote.layout.searcheable')}`"
+            v-model="locale.formTemplate.searcheable" />
         </div>
         <!--Form Right-->
         <div class="col-5 q-gutter-y-md" v-if="locale.success">
@@ -181,7 +185,8 @@
             mediasSingle: {},
             max: 0,
             min: 0,
-            withNotes: false
+            withNotes: false,
+            searcheable: false
           },
           fieldsTranslatable:{
             name: '',
