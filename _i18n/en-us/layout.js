@@ -56,7 +56,7 @@ export default {
     accreditations: 'Accreditations',
     important: 'Important',
     subImportant: 'Prices are subject to changes by representative currency rate and price change of the organizations involved.',
-    allProducts: 'All the products',
+    allProducts: 'All products',
     customPackage: 'Custom Package',
 
 
