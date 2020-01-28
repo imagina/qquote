@@ -38,6 +38,7 @@
                     <img :src="product.mainImage.path">
                   </q-avatar>
                 </q-item-section>
+                <q-checkbox v-model="product.checked" :dark="true"/>
                 <q-item-section class="q-py-md q-px-md">
                   {{product.name}}
                 </q-item-section>
