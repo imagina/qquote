@@ -64,6 +64,10 @@
         })
       },
       ifAllowCustomPackage(){
+        let ifExistCustomPackage = this.packages.find( item => item.id == -1)
+        if (ifExistCustomPackage){
+          return
+        }
         if (this.$store.getters['qsiteSettings/getSettingValueByName']('iquote::allow_custom_package')){
           this.packages.push({
             id: -1,
