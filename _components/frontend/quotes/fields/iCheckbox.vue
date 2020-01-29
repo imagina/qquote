@@ -16,33 +16,25 @@
     </div>
     
     <div v-if="characteristic.searcheable" class="col-xs-12 col-md-12 q-mt-md">
+      
       <q-select
+        use-input
         filled
+        use-chips
+        @filter="filterFn"
         v-model="model"
-        :options="characteristic.children.map( item => ({label: item.name, value: item.id}))"
+        :options="options"
         label="Select Options"
         multiple
-        emit-value
         map-options>
-        <template v-slot:option="scope">
-          <q-item
-            v-bind="scope.itemProps"
-            v-on="scope.itemEvents">
-            <q-item-section>
-              <q-item-label v-html="scope.opt.label" ></q-item-label>
-            </q-item-section>
-            <q-item-section side>
-              <q-toggle v-model="model" :val="scope.opt.value" />
-            </q-item-section>
-          </q-item>
-        </template>
+       
       </q-select>
     </div>
     
     <div class="col-xs-12 col-md-12 q-mt-md">
       <div v-if="characteristic.children">
         <div v-for="(item, index) in characteristic.children">
-          <div v-if="characteristic.model && showCharacteristic(item.id)">
+          <div v-if="characteristic.model && showCharacteristic(item)">
             <fieldContainer
               :characteristic="item"/>
           </div>
@@ -69,7 +61,13 @@
     },
     data () {
       return {
-        model: []
+        model: [],
+        options: []
+      }
+    },
+    computed:{
+      formatOptions() {
+        return this.characteristic.children.map( item => ({label: item.name, value: item.id}))
       }
     },
     methods:{
@@ -77,10 +75,23 @@
         if(this.characteristic.searcheable == false){
           return true
         }
-        if (this.model.includes(characteristic)){
+        
+        if (this.model.find( item => item.value == characteristic.id )){
           return true
         }
         return false
+      },
+      filterFn(val, update) {
+        if (val === '') {
+          update(() => {
+            this.options = this.characteristic.children.map( item => ({label: item.name, value: item.id}))
+          })
+          return
+        }
+        update(() => {
+          const needle = val.toLowerCase()
+          this.options = this.formatOptions.filter( v => v.label.toLowerCase().indexOf(needle) > -1 )
+        })
       }
     }
   }
