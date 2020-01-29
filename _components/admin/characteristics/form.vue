@@ -45,6 +45,7 @@
           <br>
           <q-checkbox
             :label="`${$tr('qquote.layout.searcheable')}`"
+            v-if="locale.formTemplate.type == 2"
             v-model="locale.formTemplate.searcheable" />
         </div>
         <!--Form Right-->
