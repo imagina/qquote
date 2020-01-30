@@ -30,7 +30,7 @@
             name: {
               label: `${this.$tr('ui.form.name')}*`,
               value: '',
-              type: 'text',
+              type: 'input',
               isTranslatable: true,
               rules: [
                 val => !!val || this.$tr('ui.message.fieldRequired')
@@ -39,7 +39,7 @@
             description: {
               label: `${this.$tr('ui.form.description')}*`,
               value: '',
-              type: 'textarea',
+              type: 'input',
               isTranslatable: true,
               rules: [
                 val => !!val || this.$tr('ui.message.fieldRequired')
