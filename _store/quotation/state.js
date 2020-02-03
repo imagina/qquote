@@ -19,8 +19,8 @@ export default {
     department: '',
     city: '',
     currency: {
-      "label": "AUD",
-      "value": 5
+      "label": "COP",
+      "value": 1
     },
   },
 }
