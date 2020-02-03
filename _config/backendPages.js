@@ -2,7 +2,7 @@ export default {
   packages: {
     permission: null,
     activated: true,
-    path: '/quote/packages/index',
+    path: 'admin/quote/packages/index',
     name: 'qquote.admin.packages',
     page: () => import('@imagina/qquote/_pages/admin/packages/index'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
@@ -13,7 +13,7 @@ export default {
   products: {
     permission: 'iquote.products.index',
     activated: true,
-    path: '/quote/products/index',
+    path: 'admin/quote/products/index',
     name: 'qquote.admin.products',
     page: () => import('@imagina/qquote/_pages/admin/products/index'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
@@ -24,7 +24,7 @@ export default {
   productsCreate: {
     permission: 'iquote.products.create',
     activated: true,
-    path: '/quote/products/create',
+    path: 'admin/quote/products/create',
     name: 'qquote.admin.productsCreate',
     page: () => import('@imagina/qquote/_pages/admin/products/create'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
@@ -35,7 +35,7 @@ export default {
   productsEdit: {
     permission: 'iquote.products.edit',
     activated: true,
-    path: '/quote/products/edit/:id',
+    path: 'admin/quote/products/edit/:id',
     name: 'qquote.admin.productsEdit',
     page: () => import('@imagina/qquote/_pages/admin/products/edit'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
@@ -46,7 +46,7 @@ export default {
   characteristicEdit: {
     permission: 'iquote.characteristics.edit',
     activated: true,
-    path: '/quote/characteristics/edit/:characteristicId',
+    path: 'admin/quote/characteristics/edit/:characteristicId',
     name: 'qquote.admin.characteristicEdit',
     page: () => import('@imagina/qquote/_pages/admin/characteristics/edit'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
@@ -57,7 +57,7 @@ export default {
   quotes: {
     permission: 'iquote.quotes.index',
     activated: true,
-    path: '/quote/quotes',
+    path: 'admin/quote/quotes',
     name: 'qquote.admin.quotes',
     page: () => import('@imagina/qquote/_pages/admin/quotes/index'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
@@ -68,7 +68,7 @@ export default {
   quotesCreate: {
     permission: 'iquote.quotes.create',
     activated: true,
-    path: '/quote/quotes/create',
+    path: 'admin/quote/quotes/create',
     name: 'qquote.admin.quotesCreate',
     page: () => import('@imagina/qquote/_pages/admin/quotes/create'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
@@ -79,7 +79,7 @@ export default {
   quotesShow: {
     permission: 'iquote.quotes.index',
     activated: true,
-    path: '/quote/quotes/:id',
+    path: 'admin/quote/quotes/:id',
     name: 'qquote.admin.quotesShow',
     page: () => import('@imagina/qquote/_pages/admin/quotes/show'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
