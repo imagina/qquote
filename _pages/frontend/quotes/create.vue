@@ -1,5 +1,5 @@
 <template>
-  <div class="row" :style="$q.platform.is.desktop ? 'padding: 13px 19.2%; z-index: 100000;' : '' ">
+  <div class="row q-container">
     <div class="col-md-12" v-if="$q.platform.is.desktop">
       <div class="flex justify-end">
         <q-btn color="primary" round icon="launch" size="xs" class="no-shadow" @click="openSiteUrl"/>
