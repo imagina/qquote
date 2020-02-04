@@ -46,7 +46,7 @@
               <q-card>
                 <q-card-section>
                   <div>
-                    <p>{{product.description}}</p>
+                    <p v-html="product.description"></p>
                   </div>
                   <div
                     v-for="(characteristic, index) in product.characteristics"
