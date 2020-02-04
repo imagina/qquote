@@ -59,7 +59,7 @@ export default {
     subImportant: 'Los precios están sujetos a cambios por tasa representativa de moneda y cambio de precios de las organizaciones involucradas.',
     allProducts: 'Todos los productos',
     customPackage: 'Paquete Personalizado',
-
+    basePrice: 'Precio Base',
   },
 
   form:{
