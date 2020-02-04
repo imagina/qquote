@@ -238,6 +238,7 @@
         let result = 0
         this.products.forEach( product => {
           if (product.checked){
+            result += product.price /* Add product`s price base in this calc */
             product.characteristics.forEach( characteristic => {
               result += this.sumCharacteristics(characteristic)
             })
