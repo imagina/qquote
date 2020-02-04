@@ -41,6 +41,7 @@
                 <q-checkbox v-model="product.checked" :dark="true"/>
                 <q-item-section class="q-py-md q-px-md">
                   {{product.name}}
+                  <div>{{$tr('qquote.layout.labels.basePrice')}} {{$trc(product.price || 0 , $store.state.qquoteQuotation.options.currency.label)}}</div>
                 </q-item-section>
               </template>
               <q-card>
