@@ -1,6 +1,6 @@
 <template>
   <div class="relative-position">
-    
+
     <div class="row">
       <div class="col-xs-12 bg-grey-2 text-primary q-px-sm q-py-lg q-mb-md rounded-borders">
         <div class="flex justify-start">
@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="row">
       <div class="col-12 q-ma-none q-pa-none">
         <q-list class="rounded-borders">
@@ -40,8 +40,8 @@
                 </q-item-section>
                 <q-checkbox v-model="product.checked" :dark="true"/>
                 <q-item-section class="q-py-md q-px-md">
-                  {{product.name}}
-                  <div>{{$tr('qquote.layout.labels.basePrice')}} {{$trc(product.price || 0 , $store.state.qquoteQuotation.options.currency.label)}}</div>
+                  <div class="text-bold">{{product.name}}</div>
+                  <div>{{$tr('qquote.layout.labels.price')}} <calcTotal :product="product" /></div>
                 </q-item-section>
               </template>
               <q-card>
@@ -70,6 +70,7 @@
 
 <script>
   import fieldContainer from '@imagina/qquote/_components/frontend/quotes/fieldContainer'
+  import calcTotal from '@imagina/qquote/_components/frontend/quotes/calcTotal'
 
   export default {
     props:{
@@ -85,7 +86,8 @@
       }
     },
     components:{
-      fieldContainer
+      fieldContainer,
+      calcTotal
     },
     created() {
 

@@ -199,7 +199,7 @@
   import userInformation from '@imagina/qquote/_components/frontend/quotes/userInformation'
   import selectPackages from '@imagina/qquote/_components/frontend/quotes/selectPackage'
   import modalShow from '@imagina/qquote/_components/frontend/quotes/show'
-  import { keysToCamel } from '@imagina/qquote/_utils/index'
+  import { keysToCamel, calTotal } from '@imagina/qquote/_utils/index'
 
   export default {
     name: 'quotaStepper',
@@ -235,16 +235,7 @@
     },
     computed:{
       total() {
-        let result = 0
-        this.products.forEach( product => {
-          if (product.checked){
-            result += product.price /* Add product`s price base in this calc */
-            product.characteristics.forEach( characteristic => {
-              result += this.sumCharacteristics(characteristic)
-            })
-          }
-        })
-        return result
+        return calTotal(this.products)
       },
       productOrPackage: {
         get: function () {
@@ -321,51 +312,6 @@
       /* This method generates a new array with the products in the package, adding a feature tree. */
       formatProducts(products){
         return products.map( product => ({ ...product , characteristics: this.$array.builTree( product.characteristics )}))
-      },
-      /* Sum totals of Selected features. */
-      sumChildren( children ){
-        let calculate = 0
-        children.forEach( element => { calculate += this.sumCharacteristics( element )})
-        return calculate
-      },
-      /* Add the characteristics according to the type. */
-      sumCharacteristics( characteristic ){
-
-        /*if characteristic is disabled*/
-        if(!characteristic.checked){
-          return 0
-        }
-
-        /*type 1 Select*/
-        if( characteristic.type == 1 ){
-          let valueSelected = characteristic.children.find( element => element.id == characteristic.model.value) || {price: 0}
-          let response = valueSelected.price
-          response += this.sumChildren(valueSelected.children || [])
-          return response
-        }
-
-        /*type 2 checkbox*/
-        if( characteristic.type == 2 && characteristic.model ){
-          let response = characteristic.price
-          response += this.sumChildren(characteristic.children || [])
-          return response
-        }
-
-        /*type 3 value*/
-        if( characteristic.type == 3 ){
-          let response = characteristic.model || 0
-          response += this.sumChildren(characteristic.children || [])
-          return response
-        }
-
-        /*type 4 number*/
-        if( characteristic.type == 4 ){
-          let response = (characteristic.model *  characteristic.price)
-          response += this.sumChildren(characteristic.childrengenerated || [])
-          return response
-        }
-
-        return 0
       },
       nextStep(){
         /*Validate if the var productOrPackage has data*/
