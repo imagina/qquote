@@ -8,9 +8,9 @@
         <q-checkbox v-model="characteristic.checked" />
         <q-item-section class="q-py-md">
           <b>{{characteristic.name}}
-          <q-icon name="info" color="grey-7">
-            <q-tooltip>
-              <span v-html="characteristic.description"></span>
+          <q-icon name="info" color="grey-7" size="xs">
+            <q-tooltip max-width="250px" :content-style="{ }">
+              <span v-html="characteristic.description" style="font-size: small"></span>
             </q-tooltip>
           </q-icon>
           </b>
