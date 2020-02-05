@@ -6,10 +6,7 @@
         return {
           apiRoute: 'apiRoutes.qquote.quotes',
           permission: 'iquote.quotes',
-          create: {
-            title: this.$tr('qquote.layout.newQuote'),
-            to: 'qquote.admin.quotesCreate',
-          },
+          create: false,
           read: {
             columns: [
               {name: 'id', label: this.$tr('ui.form.id'), field: 'id', style: 'width: 50px'},

@@ -1,6 +1,6 @@
 <template>
   <span>
-    {{$trc(getTotal|| 0 , $store.state.qquoteQuotation.options.currency.label)}}
+    {{$trc(getTotal|| product.price, $store.state.qquoteQuotation.options.currency.label)}}
   </span>
 </template>
 
@@ -16,7 +16,7 @@
     },
     computed:{
       getTotal(){
-        return calTotal([this.product])
+        return calTotal([this.product], true)
       }
     }
   }
