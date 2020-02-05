@@ -38,10 +38,10 @@ export const translateCurrency = (value, locale, currency) => {
   new Intl.NumberFormat(locale, { style: 'currency', currency: currency }).format(value)
 }
 
-export const calTotal = (products) => {
+export const calTotal = (products, calcInitialIsProductPrice = false) => {
   let result = 0
   products.forEach( product => {
-    if (product.checked){
+    if (product.checked || calcInitialIsProductPrice){
       result += product.price /* Add product`s price base in this calc */
       product.characteristics.forEach( characteristic => {
         result += sumCharacteristics(characteristic)
