@@ -2,7 +2,7 @@
   <div class="relative-position">
 
     <div class="row">
-      <div class="col-xs-12 bg-grey-2 text-primary q-px-sm q-py-lg q-mb-md rounded-borders">
+      <div class="col-xs-12 bg-grey-2 text-primary q-px-sm q-py-lg q-mb-sm rounded-borders">
         <div class="flex justify-start">
           <div>
             <q-icon name="arrow_right_alt" size="xl"/>
@@ -21,12 +21,28 @@
         </div>
       </div>
     </div>
-
+    
+    <div class="row" v-if="showSearch">
+      <div class="col-md-12 q-mb-sm">
+        <q-input
+          v-model="search"
+          filled
+          type="search"
+          :placeholder="`${$tr('qquote.layout.labels.search')} ...`">
+          <template v-slot:append>
+            <q-icon
+              name="search"
+              color="primary" />
+          </template>
+        </q-input>
+      </div>
+    </div>
+    
     <div class="row">
       <div class="col-12 q-ma-none q-pa-none">
         <q-list class="rounded-borders">
           <div
-            v-for="(product, index) in products"
+            v-for="(product, index) in productsFounded"
             :key="index">
             <q-list >
             <q-expansion-item
@@ -77,12 +93,17 @@
       products:{
         type: Array,
         default: () => []
+      },
+      showSearch:{
+        type: Boolean,
+        default: false,
       }
     },
     data () {
       return {
         loading: false,
-        model: true
+        model: true,
+        search: '',
       }
     },
     components:{
@@ -92,8 +113,19 @@
     created() {
 
     },
+    computed:{
+      productsFounded(){
+        /* Is the prop showSearch is false, return all products */
+        if (!this.showSearch){
+          return this.products
+        }
+        return this.products.filter( product => {
+          return product.name.toLowerCase().includes(this.search.toLowerCase())
+        })
+      }
+    },
     methods:{
-
+    
     }
   }
 </script>

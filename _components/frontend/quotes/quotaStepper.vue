@@ -23,7 +23,7 @@
           :name="2"
           prefix="2"
           :title="`${$tr('qquote.layout.labels.selectQuote')}`">
-          <quotation :products="products"/>
+          <quotation :products="products" showSearch/>
 
           <div class="q-ma-none q-pa-none q-mt-sm flex justify-between" v-if="$q.platform.is.desktop">
 
