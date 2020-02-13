@@ -77,3 +77,7 @@ export const set_city = ( { commit }, payload ) => (
 export const set_currency = ( { commit }, payload ) => (
   commit( 'SET_CURRENCY', payload )
 )
+
+export const set_search = ( { commit }, payload ) => (
+  commit( 'SET_SEARCH', payload )
+)

@@ -23,4 +23,5 @@ export default {
       "value": 1
     },
   },
+  search: '',
 }

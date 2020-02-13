@@ -79,3 +79,7 @@ export const SET_CITY = ( state, payload ) => {
 export const SET_CURRENCY = ( state, payload ) => {
   state.options.currency = payload
 }
+
+export const SET_SEARCH = ( state, payload ) => {
+  state.search = payload
+}

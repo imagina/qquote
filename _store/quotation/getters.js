@@ -72,3 +72,7 @@ export const getCity = ( state ) => (
 export const getCurrency = ( state ) => (
   state.options.currency
 )
+
+export const getSearch = ( state ) => (
+  state.search
+)
