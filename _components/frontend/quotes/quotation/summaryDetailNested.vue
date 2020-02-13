@@ -11,7 +11,7 @@
             </div>
             <div> <span class="text-bold"> {{$tr('qquote.layout.labels.valueUnit')}} </span>: {{$trc(item.model.price || 0), $store.state.qquoteQuotation.options.currency.label}} </div>
             <div> <span class="text-bold"> {{$tr('qquote.layout.labels.quantity')}} </span>: 1 </div>
-            <div><b>{{$tr('qquote.layout.labels.total')}}:</b> {{$trc(sumCharacteristics(item), $store.state.qquoteQuotation.options.currency.label )}}</div>
+            <div><b>{{$tr('qquote.layout.labels.total')}}:</b> {{$trc( (sumCharacteristics(item) + item.price) , $store.state.qquoteQuotation.options.currency.label )}}</div>
             <div v-if="item.children">
               <div v-for="(item, index) in item.children">
                 <summaryDetailNested :children="item.children"/>
@@ -39,7 +39,7 @@
             </div>
             <div class=""> <span class="text-bold"> {{$tr('qquote.layout.labels.valueUnit')}} </span> : {{$trc(sumCharacteristics(item), $store.state.qquoteQuotation.options.currency.label)}} </div>
             <div class=""><span class="text-bold"> {{$tr('qquote.layout.labels.quantity')}} </span>: 1 </div>
-            <div><b>{{$tr('qquote.layout.labels.total')}}:</b> {{$trc(sumCharacteristics(item), $store.state.qquoteQuotation.options.currency.label)}}</div>
+            <div><b>{{$tr('qquote.layout.labels.total')}}:</b> {{$trc( (sumCharacteristics(item) + item.price), $store.state.qquoteQuotation.options.currency.label)}}</div>
             <div v-if="item.children">
               <summaryDetailNested :children="item.children"/>
             </div>
@@ -52,7 +52,7 @@
             </div>
             <div class=""> <span class="text-bold"> {{$tr('qquote.layout.labels.valueUnit')}} </span>: {{$trc(item.price || 0, $store.state.qquoteQuotation.options.currency.label)}} </div>
             <div class=""> <span class="text-bold"> {{$tr('qquote.layout.labels.quantity')}} </span> : {{item.model}} </div>
-            <div><b>{{$tr('qquote.layout.labels.total')}}:</b> {{$trc(sumCharacteristics(item), $store.state.qquoteQuotation.options.currency.label)}}</div>
+            <div><b>{{$tr('qquote.layout.labels.total')}}:</b> {{$trc( (sumCharacteristics(item) + item.price) , $store.state.qquoteQuotation.options.currency.label)}}</div>
             <div v-if="item.children">
               <summaryDetailNested :children="item.childrenGenerated"/>
             </div>
