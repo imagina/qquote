@@ -109,7 +109,6 @@
       return {
         loading: false,
         model: true,
-        search: '',
       }
     },
     components:{
@@ -128,7 +127,15 @@
         return this.products.filter( product => {
           return product.name.toLowerCase().includes(this.search.toLowerCase())
         })
-      }
+      },
+      search: {
+        get: function () {
+          return this.$store.state.qquoteQuotation.search
+        },
+        set: function (newValue) {
+          this.$store.dispatch('qquoteQuotation/set_search', newValue)
+        },
+      },
     },
     methods:{
     
