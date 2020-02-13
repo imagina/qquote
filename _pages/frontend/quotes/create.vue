@@ -8,18 +8,18 @@
     </div>
     <div class="col-md-12 q-mt-md" v-if="$q.platform.is.desktop">
       <div class="flex justify-end">
-        <q-btn color="light-green-6" class="q-mr-md" push @click="refreshPage">
+        <q-btn color="light-green-6" class="q-mr-md" push @click="refreshPage" size="lg">
           <q-icon left name="fas fa-edit" />
           <div> {{this.$tr('qquote.layout.newQuote')}} </div>
         </q-btn>
-        <q-btn color="primary" class="q-mr-md" push @click="refreshPage">
+        <q-btn color="primary" push @click="refreshPage">
           <q-icon name="fas fa-sync-alt" />
         </q-btn>
-        <q-input v-model="model" filled type="search" style="width: 372px" :placeholder="`${$tr('qquote.layout.labels.search')} ...`">
+        <!--<q-input v-model="model" filled type="search" style="width: 372px" :placeholder="`${$tr('qquote.layout.labels.search')} ...`" v-if="false">
           <template v-slot:append>
             <q-icon name="search" color="primary" />
           </template>
-        </q-input>
+        </q-input>-->
       </div>
     </div>
 
