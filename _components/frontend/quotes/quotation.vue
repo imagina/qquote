@@ -31,6 +31,12 @@
           :placeholder="`${$tr('qquote.layout.labels.search')} ...`">
           <template v-slot:append>
             <q-icon
+              v-if="search != ''"
+              name="cancel"
+              @click.stop="search = ''"
+              class="cursor-pointer" />
+            <q-icon
+              v-else
               name="search"
               color="primary" />
           </template>
