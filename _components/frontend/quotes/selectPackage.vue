@@ -43,6 +43,7 @@
     },
     created(){
       this.$store.dispatch('qquoteQuotation/set_product_or_package', 'package')
+      this.$store.dispatch('qquoteQuotation/set_search', '')
       this.getPackages()
     },
     methods:{
