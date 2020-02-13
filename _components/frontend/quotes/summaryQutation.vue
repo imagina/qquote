@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="row">
-    <div class="col-md-6 q-mb-xl text-grey-7" v-for="(product, index) in products" :key="index" style="font-size: 15px">
+    <div class="col-md-6 q-mb-xl text-grey-7" v-for="(product, index) in productsChecked" :key="index" style="font-size: 15px">
       <div class="text-primary">
         <b>{{product.name}}</b>
       </div>
@@ -22,6 +22,10 @@
       }
     },
     computed:{
+      /* This computed property filter product and return only products with property checked equal to true */
+      productsChecked(){
+        return this.products.filter( product => product.checked)
+      },
       notes: {
         get: function () {
           return this.$store.state.qquoteQuotation.notes
