@@ -42,7 +42,7 @@ export const calTotal = (products, calcInitialIsProductPrice = false) => {
   let result = 0
   products.forEach( product => {
     if (product.checked || calcInitialIsProductPrice){
-      result += product.price /* Add product`s price base in this calc */
+      result += product.price || 0/* Add product`s price base in this calc */
       product.characteristics.forEach( characteristic => {
         result += sumCharacteristics(characteristic)
       })

@@ -1,6 +1,6 @@
 <template>
   <span>
-    {{$trc(getTotal|| product.price, $store.state.qquoteQuotation.options.currency.label)}}
+    {{$trc(getTotal|| (product.price || 0), $store.state.qquoteQuotation.options.currency.label)}}
   </span>
 </template>
 
