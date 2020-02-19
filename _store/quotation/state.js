@@ -19,8 +19,7 @@ export default {
     department: '',
     city: '',
     currency: {
-      "label": "COP",
-      "value": 1
+     
     },
   },
   search: '',

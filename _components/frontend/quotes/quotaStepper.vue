@@ -281,7 +281,7 @@
         this.$store.dispatch('qquoteQuotation/set_user_id', data.userId)
         this.$store.dispatch('qquoteQuotation/set_customer_id', data.customerId)
       },
-      getProducts(currency = 'AUD'){
+      getProducts(currency = this.$store.state.qcurrencyMaster.defaultCurrency.label){
         let params = {
           params: {
             include: 'characteristics',

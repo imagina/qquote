@@ -393,7 +393,10 @@
           }
         }
         this.$crud.index('apiRoutes.qcurrency.currencies', params ).then( response => {
-          this.dataCurrencies.currencies = Object.freeze(response.data.map( currency => ({label: currency.code, value: currency.id})))
+          let currencies = Object.freeze(response.data.map( currency => ({label: currency.code, value: currency.id, defaultCurrency: currency.defaultCurrency})))
+          this.dataCurrencies.currencies = currencies
+          this.$store.dispatch('qcurrencyMaster/set_currencies', currencies)
+          this.currency = this.$store.state.qcurrencyMaster.defaultCurrency
           this.dataCurrencies.loading = false
         }).catch( error => {
           this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
@@ -484,10 +487,7 @@
         this.country = ''
         this.department = ''
         this.city = ''
-        this.currency = {
-          "label": "AUD",
-          "value": 5
-        }
+        this.currency = this.$store.state.qcurrencyMaster.defaultCurrency
         console.warn('reseting data in user information component')
       },
       validateData(){
