@@ -15,21 +15,26 @@
         <q-btn color="primary" push @click="refreshPage">
           <q-icon name="fas fa-sync-alt" />
         </q-btn>
-        <!--<q-input v-model="model" filled type="search" style="width: 372px" :placeholder="`${$tr('qquote.layout.labels.search')} ...`" v-if="false">
-          <template v-slot:append>
-            <q-icon name="search" color="primary" />
-          </template>
-        </q-input>-->
+        <q-select
+          :options="locales"
+          filled
+          outlined
+          outlined
+          emit-value
+          map-options
+          filter
+          hide-underline
+          @input="updateLocale"
+          v-model="locale"
+          class="q-ml-md q-if-focused q-if-focusable"/>
       </div>
     </div>
-
     <userInformation
       class="col-md-12"
       :fakeFields="fakeFields"/>
     <quotaStepper
       class="col-md-12"
       :fakeFields="fakeFields"/>
-
   </div>
 </template>
 
@@ -56,6 +61,8 @@
         done3: false,
         fakeFields: [],
         loading: false,
+        locales: this.$store.getters['qsiteSettings/getSelectedLocalesSelect'],
+        locale: this.$store.getters['qsiteSettings/getDefaultLocale'],
       }
     },
     methods: {
@@ -88,6 +95,11 @@
         }).catch( error => {
           this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
           this.loading = false
+        })
+      },
+      async updateLocale () {
+        this.$store.dispatch('qsiteSettings/SET_LOCALE', { locale: this.locale, vue: this }).then(response => {
+          this.$store.dispatch('app/REFRESH_PAGE')
         })
       },
     }
