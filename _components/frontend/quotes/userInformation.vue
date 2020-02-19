@@ -316,6 +316,14 @@
           this.$store.dispatch('qquoteQuotation/set_currency', newValue)
         }
       },
+      user: {
+        get: function () {
+          return this.$store.state.qquoteQuotation.user
+        },
+        set: function (newValue) {
+          this.$store.dispatch('qquoteQuotation/set_user', newValue)
+        }
+      },
       hasPermissionToIndexUsers(){
         return this.getRole(['Admin', 'Superdmin'])
       },
@@ -365,7 +373,6 @@
           cities:[],
           loading: false,
         },
-        user: {},
         model: '',
       }
     },

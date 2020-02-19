@@ -24,6 +24,7 @@ export default {
   max: 'Maximum',
   withNotes: 'With Notes',
   searcheable: 'Searcheable',
+  registerAsUser: 'Register as user',
 
   labels:{
     informationUser: 'User Information',

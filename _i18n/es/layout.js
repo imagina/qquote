@@ -24,6 +24,7 @@ export default {
   max: 'Máximo',
   withNotes: 'Con notas',
   searcheable: 'Buscable',
+  registerAsUser: 'Registrar como usuario',
 
   labels:{
     informationUser: 'Información del Usuario',
