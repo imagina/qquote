@@ -172,11 +172,12 @@
     <div class="col-md-12 q-mt-none">
       <div :class="`row ${$q.platform.is.desktop ? 'q-col-gutter-md' : 'q-mx-md'}`">
         <div class="col-xs-12 col-md-12">
-          <q-input filled v-model="notes" :label="$tr('qquote.layout.form.notes')">
-            <template v-slot:prepend>
-              <q-icon name="fas fa-comment-dots" color="primary"/>
-            </template>
-          </q-input>
+          <q-editor
+            flat
+            toolbar-bg="grey-2"
+            content-class="bg-grey-2"
+            v-model="notes"
+            min-height="5rem" />
         </div>
       </div>
     </div>
