@@ -4,7 +4,7 @@
       <div class="row q-gutter-y-md">
         <div class="col-12">
           <div class="box">
-            <productForm/>
+            <productForm />
           </div>
         </div>
       </div>

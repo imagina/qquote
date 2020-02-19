@@ -25,6 +25,7 @@ export default {
   withNotes: 'Con notas',
   searcheable: 'Buscable',
   registerAsUser: 'Registrar como usuario',
+  includeInQuotation: 'Incluir en el càlculo de la cotizaciàn',
 
   labels:{
     informationUser: 'Información del Usuario',

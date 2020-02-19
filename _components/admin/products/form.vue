@@ -23,6 +23,9 @@
           <q-input
             :label="`${$tr('ui.form.price')}`"
             type="number" v-model="locale.formTemplate.price" outlined dense/>
+          <q-checkbox
+            :label="`${$tr('qquote.layout.includeInQuotation')}`"
+            v-model="locale.formTemplate.includeInQuotation" />
         </div>
         <!--Form Right-->
         <div class="col-5 q-gutter-y-md" v-if="locale.success">
@@ -106,6 +109,7 @@
             active: false,
             price: 0,
             mediasSingle: {},
+            includeInQuotation: true,
           },
           fieldsTranslatable:{
             name:'',

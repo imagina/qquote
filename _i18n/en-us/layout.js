@@ -25,6 +25,7 @@ export default {
   withNotes: 'With Notes',
   searcheable: 'Searcheable',
   registerAsUser: 'Register as user',
+  includeInQuotation: 'Include in the quotation calculation',
 
   labels:{
     informationUser: 'User Information',
