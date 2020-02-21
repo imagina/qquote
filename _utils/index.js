@@ -38,15 +38,17 @@ export const translateCurrency = (value, locale, currency) => {
   new Intl.NumberFormat(locale, { style: 'currency', currency: currency }).format(value)
 }
 
-export const calTotal = (products, calcInitialIsProductPrice = false) => {
+export const calTotal = (products, calcInitialIsProductPrice = false, takeIfIncludeInQuotation = true) => {
   let result = 0
   products.forEach( product => {
-    if (product.checked || calcInitialIsProductPrice){
+    
+    if ( takeIfIncludeInQuotation ? true : product.includeInQuotation && (product.checked || calcInitialIsProductPrice)){
       result += product.price || 0/* Add product`s price base in this calc */
       product.characteristics.forEach( characteristic => {
         result += sumCharacteristics(characteristic)
       })
     }
+
   })
   return result
 }

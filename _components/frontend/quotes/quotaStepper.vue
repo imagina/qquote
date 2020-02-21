@@ -243,7 +243,7 @@
     },
     computed:{
       total() {
-        return calTotal(this.products)
+        return calTotal(this.products, false, false)
       },
       productOrPackage: {
         get: function () {

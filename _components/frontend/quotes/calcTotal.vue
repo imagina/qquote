@@ -12,11 +12,15 @@
         type: Object,
         required: true,
         default: () => {}
+      },
+      takeIfIncludeInQuotation:{
+        type: Boolean,
+        default: true
       }
     },
     computed:{
       getTotal(){
-        return calTotal([this.product], true)
+        return calTotal([this.product], true, this.takeIfIncludeInQuotation)
       }
     }
   }

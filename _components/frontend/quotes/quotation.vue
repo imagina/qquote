@@ -61,7 +61,6 @@
                   </q-avatar>
                 </q-item-section>
                 <q-checkbox
-                  :disable="!product.includeInQuotation"
                   v-model="product.checked"
                   :dark="true"/>
                 <q-item-section class="q-py-md q-px-md">
