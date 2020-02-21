@@ -60,7 +60,10 @@
                     <img :src="product.mainImage.path">
                   </q-avatar>
                 </q-item-section>
-                <q-checkbox v-model="product.checked" :dark="true"/>
+                <q-checkbox
+                  :disable="!product.includeInQuotation"
+                  v-model="product.checked"
+                  :dark="true"/>
                 <q-item-section class="q-py-md q-px-md">
                   <div class="text-bold">{{product.name}}</div>
                   <div>{{$tr('qquote.layout.labels.price')}} <calcTotal :product="product" /></div>
