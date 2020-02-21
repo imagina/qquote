@@ -351,6 +351,9 @@
       },
       'options.department': function (val) {
         this.options.city = ''
+      },
+      currency: function (val, oldVal) {
+        this.oldCurrency = oldVal
       }
     },
     data () {
@@ -375,6 +378,7 @@
           loading: false,
         },
         model: '',
+        oldCurrency: '',
       }
     },
     methods:{
@@ -412,7 +416,18 @@
         })
       },
       emitEventChangeCurrency(){
-        this.$root.$emit('changeCurrency', this.currency)
+        this.$q.dialog({
+          title: this.$tr('qquote.layout.labels.confirm'),
+          message: 'Antes de continuar debe tener en cuenta que esto re iniciara los datos del formulario',
+          cancel: true,
+          persistent: true
+        }).onOk(() => {
+          this.$root.$emit('changeCurrency', this.currency)
+          this.$store.dispatch('qquoteQuotation/set_currency', this.currency)
+        }).onCancel(() => {
+          this.currency = this.oldCurrency
+          this.$store.dispatch('qquoteQuotation/set_currency', this.oldCurrency)
+        })
       },
       getCountries(){
         this.dataCountries.loading = true

@@ -257,7 +257,7 @@
     methods:{
       handeNext(){
         this.$refs.stepper.next()
-        this.getProducts()
+        this.getProducts(this.$store.state.qquoteQuotation.options.currency.label)
       },
       async initForm(){
         this.loading = true
