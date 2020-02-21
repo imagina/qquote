@@ -98,9 +98,10 @@
         })
       },
       async updateLocale () {
-        this.$store.dispatch('qsiteSettings/SET_LOCALE', { locale: this.locale, vue: this }).then(response => {
+        await this.$store.dispatch('qsiteSettings/SET_LOCALE', { locale: this.locale, vue: this }).then(response => {
           this.$store.dispatch('app/REFRESH_PAGE')
         })
+        await location.reload()
       },
     }
   }
