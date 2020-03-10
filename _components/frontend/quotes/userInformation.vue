@@ -477,8 +477,8 @@
         })
       },
       validateIsAdmin(){
-        let resultVerifyRole = this.getRole('Admin')
-        if (resultVerifyRole){
+        let resultVerifyPermission = this.$store.state.quserAuth.userId && this.hasPermissionToIndexUsers
+        if (resultVerifyPermission){
           this.userId = parseInt(this.$store.state.quserAuth.userId)
         } else {
           this.userId = null
