@@ -12,9 +12,14 @@
         {{$tr('qquote.layout.labels.quantity')}}
         <q-input
           filled
+          :rules="[
+            val => val <= characteristic.max || '',
+            val => val >= 0 || ''
+           ]"
+          type="number"
           outlined
           v-model="characteristic.model"
-          disable/>
+          />
       </div>
       <div class="col-xs-12 col-md-4">
         {{$tr('qquote.layout.labels.total')}}
@@ -74,6 +79,13 @@
       it has as many times as indicated in the variable model
       is rendered*/
       'characteristic.model': function (newValue, oldValue) {
+        if(this.characteristic.model < 0){
+          this.characteristic.model = 0
+        }
+        if(this.characteristic.model > this.characteristic.max){
+          this.characteristic.model = this.characteristic.max
+        }
+        
         if (this.characteristic.children){
           this.characteristic.childrengenerated = []
           for (let i = 1; i <= newValue; i++) {
