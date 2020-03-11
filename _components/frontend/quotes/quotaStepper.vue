@@ -58,6 +58,7 @@
                 </div>
 
                 <q-btn
+                  style="z-index: 10000"
                   v-if="step == 2"
                   :disable="total == 0"
                   @click="$refs.stepper.next()"
