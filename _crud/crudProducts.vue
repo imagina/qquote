@@ -8,7 +8,7 @@
           permission: 'iquote.products',
           create: {
             title: this.$tr('qquote.layout.newProduct'),
-            to: '/quote/products/create',
+            to: '/admin/quote/products/create',
           },
           read: {
             columns: [
