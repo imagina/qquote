@@ -1,9 +1,10 @@
 <template>
   <div>
     <ul class="tree">
+      
       <li v-for="(item, index) in children" :key="index">
         
-        <div v-if="item.model != false  || item.type != 2">
+        <div v-if="(item.model != false  || item.type != 2) && item.checked">
           <div v-if="item.type == 1">
             <div class="text-primary text-bold">
               <q-icon name="fas fa-square" size="6px"/>
