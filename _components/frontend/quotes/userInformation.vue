@@ -76,7 +76,7 @@
             v-model="birthday"
             mask="date"
             :label="$tr('qquote.layout.form.dateBirth')"
-            :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
+            :rules="[/*val => !!val || $tr('ui.message.fieldRequired')*/]">
             <template v-slot:prepend>
               <q-icon name="event" class="cursor-pointer" color="primary">
                 <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
