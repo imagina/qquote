@@ -197,6 +197,8 @@
 </template>
 
 <script>
+  import appConfig from 'src/config/app'
+  
   export default {
     name: "userInformation",
     props:{
@@ -337,6 +339,7 @@
       this.validateIsAdmin()
       this.getCountries()
       this.isRoleUserCompleteDatabase()
+	    this.setLocalDataFromAppConfig()
     },
     watch: {
       user: function (val){
@@ -516,6 +519,15 @@
       validateData(){
         this.$refs.formContent.validate()
       },
+	    setLocalDataFromAppConfig(){
+        if(appConfig && appConfig.qquote && appConfig.qquote.defatultValues){
+          const values = appConfig.qquote.defatultValues
+          const keys = Object.keys(values)
+	        for (let i = 0; i < keys.length; i++){
+		        this[keys[i]] = {...values[keys[i]]}
+	        }
+        }
+	    }
     }
   }
 </script>

@@ -39,3 +39,23 @@ _Nota: Backend vérsion compatible [asgard_cms-iquote 1.0.8](https://github.com/
   | quotesCreate | qquote.admin.quotesCreate |  |
   | quotesShow | qquote.admin.quotesShow | id |
 
+
+## Default values
+
+If you want values by default in client´s profile form, add your field in config app file.
+
+
+``src/config/app.js``
+
+```js
+...
+  qquote:{
+    defatultValues:{
+      country: {
+        "label": "Colombia",
+        "value": 297
+      }
+    }
+  }
+...
+```
