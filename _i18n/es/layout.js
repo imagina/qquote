@@ -73,7 +73,7 @@ export default {
     department: 'Departamento o Estado',
     city: 'Ciudad',
     email: 'Correo Electrónico',
-    phone: 'Celular o Telèfono',
+    phone: 'Celular o Teléfono',
     currencyQuoted: 'Moneda en la que se cotiza',
     notes: 'Notas Adicionales',
     value: 'Valores',
