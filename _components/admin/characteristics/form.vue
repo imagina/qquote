@@ -60,7 +60,12 @@
             ]"/>
           <q-input
             :label="`${$tr('ui.form.price')}`"
+            v-bind="moneyFormatForComponent"
             type="number" v-model="locale.formTemplate.price" outlined dense/>
+	        <q-input
+		        :label="`${$tr('qquote.layout.discount')}`"
+		        v-bind="moneyFormatForComponent"
+		        type="number" v-model="locale.formTemplate.discount" outlined dense/>
           <q-select
             :label="`${$tr('ui.form.required')}`"
             v-model="locale.formTemplate.required" outlined dense
@@ -170,6 +175,14 @@
             ['fullscreen']
           ]
         },
+        moneyFormatForComponent: {
+          decimal: '.',
+          thousands: ',',
+          prefix: '$ ',
+          suffix: '',
+          precision: 2,
+          masked: true
+        }
       }
     },
     computed: {
@@ -180,6 +193,7 @@
             type: '',
             parentId: this.parentId,
             price: '0',
+            discount: 0,
             active: true,
             position: '0',
             required: false,

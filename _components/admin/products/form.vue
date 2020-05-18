@@ -22,7 +22,12 @@
             type="textarea" v-model="locale.formTemplate.description" outlined dense/>
           <q-input
             :label="`${$tr('ui.form.price')}`"
+            v-bind="moneyFormatForComponent"
             type="number" v-model="locale.formTemplate.price" outlined dense/>
+	        <q-input
+		        :label="`${$tr('qquote.layout.discount')}`"
+		        v-bind="moneyFormatForComponent"
+		        type="number" v-model="locale.formTemplate.discount" outlined dense/>
           <q-checkbox
             :label="`${$tr('qquote.layout.includeInQuotation')}`"
             v-model="locale.formTemplate.includeInQuotation" />
@@ -100,6 +105,14 @@
         success: false,
         itemId: false,
         mediaKey: this.$uid(),
+        moneyFormatForComponent: {
+          decimal: '.',
+          thousands: ',',
+          prefix: '$ ',
+          suffix: '',
+          precision: 2,
+          masked: true
+        }
       }
     },
     computed: {
@@ -110,6 +123,7 @@
             price: 0,
             mediasSingle: {},
             includeInQuotation: true,
+	          discount: 0
           },
           fieldsTranslatable:{
             name:'',
