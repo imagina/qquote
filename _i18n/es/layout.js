@@ -26,6 +26,7 @@ export default {
   searcheable: 'Buscable',
   registerAsUser: 'Registrar como usuario',
   includeInQuotation: 'Incluir en el càlculo de la cotizaciàn',
+  discount: 'Descuento',
 
   labels:{
     informationUser: 'Información del Usuario',
