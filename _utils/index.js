@@ -38,14 +38,14 @@ export const translateCurrency = (value, locale, currency) => {
   new Intl.NumberFormat(locale, { style: 'currency', currency: currency }).format(value)
 }
 
-export const calTotal = (products, calcInitialIsProductPrice = false, takeIfIncludeInQuotation = true) => {
+export const calTotal = (products, calcInitialIsProductPrice = false, takeIfIncludeInQuotation = true, field = 'price') => {
   let result = 0
   products.forEach( product => {
     
     if ( takeIfIncludeInQuotation ? true : product.includeInQuotation && (product.checked || calcInitialIsProductPrice)){
-      result += product.price || 0/* Add product`s price base in this calc */
+      result += product[field] || 0/* Add product`s price base in this calc */
       product.characteristics.forEach( characteristic => {
-        result += sumCharacteristics(characteristic)
+        result += sumCharacteristics(characteristic, field)
       })
     }
 
@@ -53,7 +53,7 @@ export const calTotal = (products, calcInitialIsProductPrice = false, takeIfIncl
   return result
 }
 
-const sumCharacteristics = (characteristic) => {
+const sumCharacteristics = (characteristic, field = 'price') => {
 
     /*if characteristic is disabled*/
     if(!characteristic.checked){
@@ -63,14 +63,14 @@ const sumCharacteristics = (characteristic) => {
     /*type 1 Select*/
     if( characteristic.type == 1 ){
       let valueSelected = characteristic.children.find( element => element.id == characteristic.model.value) || {price: 0}
-      let response = valueSelected.price
+      let response = valueSelected[field]
       response += sumChildren(valueSelected.children || [])
       return response
     }
 
     /*type 2 checkbox*/
     if( characteristic.type == 2 && characteristic.model ){
-      let response = characteristic.price
+      let response = characteristic[field]
       response += sumChildren(characteristic.children || [])
       return response
     }
@@ -84,7 +84,7 @@ const sumCharacteristics = (characteristic) => {
 
     /*type 4 number*/
     if( characteristic.type == 4 ){
-      let response = (characteristic.model *  characteristic.price)
+      let response = (characteristic.model *  characteristic[field])
       response += sumChildren(characteristic.childrengenerated || [])
       return response
     }
