@@ -65,7 +65,10 @@
                   :dark="true"/>
                 <q-item-section class="q-py-md q-px-md">
                   <div class="text-bold">{{product.name}}</div>
-                  <div>{{$tr('qquote.layout.labels.price')}} <calcTotal :product="product" /></div>
+                  <div>{{$tr('qquote.layout.labels.price')}}
+	                  <calcTotal :product="product" :lineThrough="true" class="q-mr-sm"/>
+	                  <calcTotal :product="product" field="valueWithDiscount"/>
+                  </div>
                 </q-item-section>
               </template>
               <q-card>
