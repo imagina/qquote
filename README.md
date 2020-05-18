@@ -1,4 +1,4 @@
-## QQUOTE  | 1.0.9
+## QQUOTE  | 1.0.10
 
 _Nota: Backend vérsion compatible [asgard_cms-iquote 1.0.8](https://github.com/imagina/asgardcms-iquote/tree/1.0.8)_
 
