@@ -66,8 +66,14 @@
                 <q-item-section class="q-py-md q-px-md">
                   <div class="text-bold">{{product.name}}</div>
                   <div>{{$tr('qquote.layout.labels.price')}}
-	                  <calcTotal :product="product" :lineThrough="true" class="q-mr-sm"/>
-	                  <calcTotal :product="product" field="valueWithDiscount"/>
+	                  <calcTotal
+					            :product="product"
+					            :lineThrough="product.discount == 0 ? false : true"
+					            class="q-mr-sm"/>
+	                  <calcTotal
+					            :product="product"
+					            v-if="product.discount == 0 ? false : true"
+					            field="valueWithDiscount"/>
                   </div>
                 </q-item-section>
               </template>
