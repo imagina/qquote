@@ -131,7 +131,7 @@
                 <q-btn
                   size="lg"
                   push
-                  :loading="loadingSaveQuote"
+                  :loading="loadingSend"
                   @click="saveQuote('send')"
                   icon="mail_outline"
                   type="submit"
@@ -143,7 +143,7 @@
                 <q-btn
                   size="lg"
                   push
-                  :loading="loadingSaveQuote"
+                  :loading="loadingDownload"
                   @click="saveQuote('download')"
                   icon="fas fa-download"
                   type="submit"
@@ -235,7 +235,8 @@
         quoteSaved: {},
         showQuoteSaved: false,
         registerNewUser: false,
-        loadingSaveQuote: false,
+        loadingSend: false,
+        loadingDownload: false,
       }
     },
     mounted(){
@@ -385,27 +386,30 @@
 
         if (sendOrDownload == 'send'){
           data['isSending'] = true
+          this.loadingSend = true
         }
         if(sendOrDownload == 'download'){
           data['IsDownloading'] = true
+          this.loadingDownload = true
         }
 
         this.loading = true
-	      this.loadingSaveQuote = true
 
         // call request to server for send data
         this.$crud.create( 'apiRoutes.qquote.quotes', data ).then( response => {
           this.postSavedQuote(response, sendOrDownload)
           this.$alert.success({ message: `${this.$tr('ui.message.recordCreated')} ID: ${response.data.id}` })
           this.loading = false
-	        this.loadingSaveQuote = false
+          this.loadingDownload = false
+	        this.loadingSend = false
         }).catch( error => {
           this.$alert.error({
             message: this.$tr( 'ui.message.errorRequest' ),
             pos: 'bottom'
           })
           this.loading = false
-	        this.loadingSaveQuote = false
+          this.loadingDownload = false
+	        this.loadingSend = false
         })
         
         if(this.registerNewUser &&
