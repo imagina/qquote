@@ -3,6 +3,7 @@
     ref="formContent"
     class="row q-gutter-y-md"
     autocomplete="off"
+    @reset="onReset"
     @validation-error="$alert.error($tr('ui.message.formInvalid'))">
     <div class="col-xs-12 col-md-12 q-mt-xl">
       <div class="q-mt-sm q-px-md flex justify-center text-h5 heading-1">
@@ -192,7 +193,14 @@
         </div>
       </div>
     </div>
-    <inner-loading :visible="loading"/>
+	  <q-btn
+			flat
+			dense
+		  type="reset"
+      class="text-white"
+			ref="resetBtn"
+	  />
+	  <inner-loading :visible="loading"/>
   </q-form>
 </template>
 
@@ -499,7 +507,9 @@
         }
       },
       resetData(){
-        this.$refs.formContent.resetValidation()
+        this.$refs.resetBtn.$el.click()
+      },
+      onReset (){
         this.firstName = ''
         this.lastName = ''
         this.email = ''
@@ -509,16 +519,23 @@
         this.userId = ''
         this.customerId = ''
         this.identification = ''
-        this.dateBirth = ''
+        this.dateBirth = null
+        this.birthday = ''
         this.country = ''
         this.department = ''
         this.city = ''
         this.currency = this.$store.state.qcurrencyMaster.defaultCurrency
-        console.warn('reseting data in user information component')
-      },
+        this.setLocalDataFromAppConfig()
+	      this.resetFakeFields()
+	    },
       validateData(){
         this.$refs.formContent.validate()
       },
+	    resetFakeFields(){
+        for (let key in this.fakeFields){
+          this.fakeFields[key].value = ''
+        }
+	    },
 	    setLocalDataFromAppConfig(){
         if(appConfig && appConfig.qquote && appConfig.qquote.defatultValues){
           const values = appConfig.qquote.defatultValues
